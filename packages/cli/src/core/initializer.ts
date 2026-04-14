@@ -48,8 +48,8 @@ export async function initializeApp(
 
   const themeError = validateTheme(settings);
 
-  const shouldOpenAuthDialog =
-    !config.getModelsConfig().wasAuthTypeExplicitlyProvided() || !!authError;
+  // AIRA: skip auth dialog entirely; API key is expected to be pre-configured
+  const shouldOpenAuthDialog = false;
 
   if (config.getIdeMode()) {
     const ideClient = await IdeClient.getInstance();

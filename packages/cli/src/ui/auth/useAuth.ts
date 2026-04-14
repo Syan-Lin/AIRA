@@ -74,7 +74,7 @@ export const useAuthCommand = (
       setAuthError(error);
       if (error) {
         setAuthState(AuthState.Updating);
-        setIsAuthDialogOpen(true);
+        // AIRA: do not pop the auth dialog; keep it inline
       }
     },
     [setAuthError, setAuthState],

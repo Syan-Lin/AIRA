@@ -295,7 +295,7 @@ export const DialogManager = ({
     }
   }
 
-  if (uiState.isAuthDialogOpen || uiState.authError) {
+  if (uiState.isAuthDialogOpen) {
     return (
       <Box flexDirection="column">
         <AuthDialog />
