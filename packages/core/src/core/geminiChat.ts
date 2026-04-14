@@ -565,8 +565,14 @@ export class GeminiChat {
     params: SendMessageParameters,
     prompt_id: string,
   ): Promise<AsyncGenerator<GenerateContentResponse>> {
+    const contentGenerator = this.config.getContentGenerator();
+    if (!contentGenerator) {
+      throw new Error(
+        'No API key configured. Please configure your API key before chatting with AIRA.',
+      );
+    }
     const apiCall = () =>
-      this.config.getContentGenerator().generateContentStream(
+      contentGenerator.generateContentStream(
         {
           model,
           contents: requestContents,
