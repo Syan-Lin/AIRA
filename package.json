@@ -1,6 +1,6 @@
 {
-  "name": "@qwen-code/qwen-code",
-  "version": "0.14.4",
+  "name": "@aira/aira-cli",
+  "version": "0.1.0",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -15,10 +15,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git"
+    "url": "git+https://github.com/AI-SOIL-Lab/AIRA.git"
   },
   "config": {
-    "sandboxImageUri": "ghcr.io/qwenlm/qwen-code:0.14.4"
+    "sandboxImageUri": "ghcr.io/ai-soil-lab/aira:0.1.0"
   },
   "scripts": {
     "start": "cross-env node scripts/start.js",
@@ -76,7 +76,7 @@
     "normalize-package-data": "^7.0.1"
   },
   "bin": {
-    "qwen": "dist/cli.js"
+    "aira": "dist/cli.js"
   },
   "files": [
     "dist/",
