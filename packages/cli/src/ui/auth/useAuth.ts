@@ -50,16 +50,15 @@ export const useAuthCommand = (
   addItem: (item: Omit<HistoryItem, 'id'>, timestamp: number) => void,
   onAuthChange?: () => void,
 ) => {
-  const unAuthenticated = config.getAuthType() === undefined;
-
+  // AIRA: never show auth dialog; API key is expected pre-configured
   const [authState, setAuthState] = useState<AuthState>(
-    unAuthenticated ? AuthState.Updating : AuthState.Unauthenticated,
+    AuthState.Unauthenticated,
   );
 
   const [authError, setAuthError] = useState<string | null>(null);
 
   const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(unAuthenticated);
+  const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
   const [pendingAuthType, setPendingAuthType] = useState<AuthType | undefined>(
     undefined,
   );
