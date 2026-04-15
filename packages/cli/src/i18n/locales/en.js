@@ -2077,6 +2077,8 @@ export default {
   'Base URL (leave empty for default)': 'Base URL (leave empty for default)',
   'Base URL': 'Base URL',
   'Model ID': 'Model ID',
+  'Model ID (leave empty if the provider does not require one)':
+    'Model ID (leave empty if the provider does not require one)',
   'API Key': 'API Key',
   'Enter MinerU token': 'Enter MinerU token',
   'Enter AMiner token': 'Enter AMiner token',

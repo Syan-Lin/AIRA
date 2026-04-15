@@ -146,29 +146,38 @@ export function ModelDialog({
   const authType = config?.getAuthType();
 
   const availableModelEntries = useMemo(() => {
+    const currentAuthType = config?.getAuthType();
     const allModels = config ? config.getAllConfiguredModels() : [];
 
+    // Hide hard-coded qwen-oauth models unless it is the current auth type
+    const visibleModels = allModels.filter((m) => {
+      if (m.authType === AuthType.QWEN_OAUTH) {
+        return currentAuthType === AuthType.QWEN_OAUTH;
+      }
+      return true;
+    });
+
     // Separate runtime models from registry models
-    const runtimeModels = allModels.filter((m) => m.isRuntimeModel);
-    const registryModels = allModels.filter((m) => !m.isRuntimeModel);
+    const runtimeModels = visibleModels.filter((m) => m.isRuntimeModel);
+    const registryModels = visibleModels.filter((m) => !m.isRuntimeModel);
 
     // Group registry models by authType
     const modelsByAuthTypeMap = new Map<AuthType, CoreAvailableModel[]>();
     for (const model of registryModels) {
-      const authType = model.authType;
-      if (!modelsByAuthTypeMap.has(authType)) {
-        modelsByAuthTypeMap.set(authType, []);
+      const at = model.authType;
+      if (!modelsByAuthTypeMap.has(at)) {
+        modelsByAuthTypeMap.set(at, []);
       }
-      modelsByAuthTypeMap.get(authType)!.push(model);
+      modelsByAuthTypeMap.get(at)!.push(model);
     }
 
-    // Fixed order: qwen-oauth first, then others in a stable order
+    // Fixed order for remaining authTypes
     const authTypeOrder: AuthType[] = [
-      AuthType.QWEN_OAUTH,
       AuthType.USE_OPENAI,
       AuthType.USE_ANTHROPIC,
       AuthType.USE_GEMINI,
       AuthType.USE_VERTEX_AI,
+      AuthType.QWEN_OAUTH,
     ];
 
     // Filter to only include authTypes that have registry models and maintain order

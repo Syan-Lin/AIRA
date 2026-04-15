@@ -200,12 +200,10 @@ async function addApiKey(settings: LoadedSettings): Promise<void> {
   const modelIdResp = await prompts({
     type: 'text',
     name: 'modelId',
-    message: t('Model ID'),
-    initial: format === 'anthropic' ? 'claude-3-5-sonnet' : 'gpt-4o',
+    message: t('Model ID (leave empty if the provider does not require one)'),
   });
 
-  if (!modelIdResp.modelId) return;
-  const modelId = String(modelIdResp.modelId).trim();
+  const modelId = String(modelIdResp.modelId ?? '').trim() || 'default';
 
   const apiKeyResp = await prompts({
     type: 'password',
