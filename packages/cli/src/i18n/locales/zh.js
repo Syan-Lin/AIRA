@@ -90,7 +90,7 @@ export default {
   // System Information Fields
   // ============================================================================
   'Qwen Code': 'Qwen Code',
-  Runtime: '运行环境',
+  Runtime: '运行时',
   OS: '操作系统',
   Auth: '认证',
   'CLI Version': 'CLI 版本',
@@ -1846,4 +1846,56 @@ export default {
     '未处于计划模式。请先使用 "/plan" 进入计划模式。',
 
   "Set up Qwen Code's status line UI": '配置 Qwen Code 的状态栏',
+
+  // ============================================================================
+  // AIRA init / setup commands
+  // ============================================================================
+  'Initialize an AIRA project in the current directory':
+    '在当前目录初始化 AIRA 项目',
+  'Target directory for the AIRA project': 'AIRA 项目的目标目录',
+  'Initializing AIRA project in {{dir}}...': '正在 {{dir}} 初始化 AIRA 项目...',
+  'Created {{file}}': '已创建 {{file}}',
+  'Skipped existing {{file}}': '已跳过存在的 {{file}}',
+  'Initialized git repository.': '已初始化 git 仓库。',
+  'Git repository already exists.': 'Git 仓库已存在。',
+  'Git initialization skipped.': 'Git 初始化已跳过。',
+  'AIRA project initialized successfully.': 'AIRA 项目初始化成功。',
+  'Failed to initialize project: {{error}}': '初始化项目失败：{{error}}',
+  'Set up global AIRA configuration': '设置全局 AIRA 配置',
+  'Setting up global AIRA configuration in {{dir}}...':
+    '正在 {{dir}} 设置全局 AIRA 配置...',
+  'Global AIRA configuration completed.': '全局 AIRA 配置完成。',
+  'Failed to setup global config: {{error}}': '设置全局配置失败：{{error}}',
+  'What would you like to configure?': '您想配置什么？',
+  'Manage API keys': '管理 API 密钥',
+  'Configure MinerU token': '配置 MinerU 令牌',
+  'Configure AMiner token': '配置 AMiner 令牌',
+  Done: '完成',
+  'Add new API key': '添加新 API 密钥',
+  Delete: '删除',
+  'Select API key format': '选择 API 密钥格式',
+  'OpenAI-compatible': 'OpenAI 兼容',
+  Anthropic: 'Anthropic',
+  'Base URL (leave empty for default)': 'Base URL（留空使用默认值）',
+  'Model ID': '模型 ID',
+  'Model ID (leave empty if the provider does not require one)':
+    '模型 ID（如果提供商不需要可留空）',
+  'Enter MinerU token': '输入 MinerU 令牌',
+  'Enter AMiner token': '输入 AMiner 令牌',
+  'API key saved successfully.': 'API 密钥保存成功。',
+  'Token saved successfully.': '令牌保存成功。',
+  'No API keys configured.': '尚未配置 API 密钥。',
+  'At least one API key is required before exiting setup.':
+    '退出设置前至少需要一个 API 密钥。',
+  'API key deleted.': 'API 密钥已删除。',
+  'Delete API key for {{model}}?': '删除 {{model}} 的 API 密钥？',
+  'An existing {{key}} is already configured. Overwrite?':
+    '已存在 {{key}} 配置。是否覆盖？',
+
+  // ModelDialog extras
+  'Runtime model': '运行时模型',
+  'Failed to switch to runtime model.': '切换运行时模型失败。',
+  "Failed to switch model to '{{model}}'.": "切换模型到 '{{model}}' 失败。",
+  'Please configure models in settings.modelProviders or use environment variables.':
+    '请在 settings.modelProviders 中配置模型或使用环境变量。',
 };

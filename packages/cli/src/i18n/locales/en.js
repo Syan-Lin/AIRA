@@ -2091,4 +2091,12 @@ export default {
   'Delete API key for {{model}}?': 'Delete API key for {{model}}?',
   'An existing {{key}} is already configured. Overwrite?':
     'An existing {{key}} is already configured. Overwrite?',
+
+  // ModelDialog extras
+  'Runtime model': 'Runtime model',
+  'Failed to switch to runtime model.': 'Failed to switch to runtime model.',
+  "Failed to switch model to '{{model}}'.":
+    "Failed to switch model to '{{model}}'.",
+  'Please configure models in settings.modelProviders or use environment variables.':
+    'Please configure models in settings.modelProviders or use environment variables.',
 };

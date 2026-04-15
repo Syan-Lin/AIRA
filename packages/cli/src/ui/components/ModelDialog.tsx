@@ -232,7 +232,7 @@ export function ModelDialog({
               </Text>
               <Text>{` ${model.label}`}</Text>
               {isRuntime && (
-                <Text color={theme.status.warning}> (Runtime)</Text>
+                <Text color={theme.status.warning}> ({t('Runtime')})</Text>
               )}
             </Text>
           );
@@ -241,8 +241,8 @@ export function ModelDialog({
           let description = model.description || '';
           if (isRuntime) {
             description = description
-              ? `${description} (Runtime)`
-              : 'Runtime model';
+              ? `${description} (${t('Runtime')})`
+              : t('Runtime model');
           }
 
           return {
@@ -391,8 +391,10 @@ export function ModelDialog({
       } catch (e) {
         const baseErrorMessage = e instanceof Error ? e.message : String(e);
         const errorPrefix = isRuntime
-          ? 'Failed to switch to runtime model.'
-          : `Failed to switch model to '${effectiveModelId ?? selected}'.`;
+          ? t('Failed to switch to runtime model.')
+          : t("Failed to switch model to '{{model}}'.", {
+              model: effectiveModelId ?? selected,
+            });
         setErrorMessage(`${errorPrefix}\n\n${baseErrorMessage}`);
         return;
       }
@@ -483,11 +485,11 @@ export function ModelDialog({
           {highlightedEntry.authType !== AuthType.QWEN_OAUTH && (
             <>
               <DetailRow
-                label="Base URL"
+                label={t('Base URL')}
                 value={highlightedEntry.model.baseUrl ?? t('(default)')}
               />
               <DetailRow
-                label="API Key"
+                label={t('API Key')}
                 value={highlightedEntry.model.envKey ?? t('(not set)')}
               />
             </>

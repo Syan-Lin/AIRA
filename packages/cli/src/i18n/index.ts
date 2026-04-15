@@ -19,7 +19,7 @@ export type { SupportedLanguage };
 export { getLanguageNameFromLocale };
 
 // State
-let currentLanguage: SupportedLanguage = 'en';
+let currentLanguage: SupportedLanguage = 'zh';
 let translations: Record<string, string | string[]> = {};
 
 // Cache
