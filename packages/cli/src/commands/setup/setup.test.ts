@@ -12,6 +12,8 @@ const stderrLines: string[] = [];
 const fsStore = new Map<string, string>();
 const dirs = new Set<string>();
 
+let promptQueue: Array<Record<string, unknown>> = [];
+
 vi.mock('node:fs', () => ({
   default: {
     mkdirSync: vi.fn((p: string) => {
@@ -28,6 +30,13 @@ vi.mock('node:fs', () => ({
   existsSync: vi.fn((p: string) => fsStore.has(p) || dirs.has(p)),
   writeFileSync: vi.fn((p: string, data: string) => {
     fsStore.set(p, data);
+  }),
+}));
+
+vi.mock('prompts', () => ({
+  default: vi.fn(async () => {
+    const next = promptQueue.shift();
+    return next ?? {};
   }),
 }));
 
@@ -61,12 +70,34 @@ vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
   };
 });
 
+const setValues: Array<{ key: string; value: unknown }> = [];
+
+vi.mock('../../config/settings.js', () => ({
+  loadSettings: vi.fn(() => ({
+    merged: {
+      modelProviders: {},
+      env: {},
+    },
+    forScope: vi.fn(() => ({ path: '/home/user/.aira/settings.json' })),
+    setValue: vi.fn((_scope: unknown, key: string, value: unknown) => {
+      setValues.push({ key, value });
+    }),
+  })),
+  SettingScope: { User: 'user' },
+}));
+
+vi.mock('../../utils/settingsUtils.js', () => ({
+  backupSettingsFile: vi.fn(),
+}));
+
 describe('runGlobalSetup', () => {
   beforeEach(() => {
     stdoutLines.length = 0;
     stderrLines.length = 0;
     fsStore.clear();
     dirs.clear();
+    promptQueue = [];
+    setValues.length = 0;
 
     vi.spyOn(process, 'exit').mockImplementation(() => {
       throw new Error('process.exit');
@@ -78,37 +109,105 @@ describe('runGlobalSetup', () => {
   });
 
   it('creates global dir and AIRA.md when missing', async () => {
+    promptQueue.push(
+      { action: 'keys' }, // Manage API keys
+      { action: 'add' }, // Add new
+      { format: 'openai' },
+      { baseUrl: '' },
+      { modelId: 'gpt-4o' },
+      { apiKey: 'sk-test' },
+      { action: 'back' }, // Back from API keys
+      { action: 'done' }, // Done
+    );
+
     await runGlobalSetup();
 
     expect(dirs.has('/home/user/.aira')).toBe(true);
     expect(fsStore.get('/home/user/.aira/AIRA.md')).toBe('');
-
-    expect(stdoutLines).toContain(
-      'Setting up global AIRA configuration in /home/user/.aira...',
-    );
-    expect(stdoutLines).toContain('Global AIRA configuration completed.');
   });
 
-  it('skips existing files', async () => {
-    dirs.add('/home/user/.aira');
-    fsStore.set('/home/user/.aira/AIRA.md', 'existing');
+  it('adding an API key writes expected settings', async () => {
+    promptQueue.push(
+      { action: 'keys' },
+      { action: 'add' },
+      { format: 'anthropic' },
+      { baseUrl: 'https://custom.example.com/v1' },
+      { modelId: 'claude-3-5-sonnet' },
+      { apiKey: 'sk-ant' },
+      { action: 'back' },
+      { action: 'done' },
+    );
 
     await runGlobalSetup();
 
-    expect(fsStore.get('/home/user/.aira/AIRA.md')).toBe('existing');
-    expect(stdoutLines.some((m) => m.includes('Skipped existing'))).toBe(true);
-    expect(stdoutLines).toContain('Global AIRA configuration completed.');
+    expect(
+      setValues.some(
+        (s) => s.key === 'env.ANTHROPIC_API_KEY' && s.value === 'sk-ant',
+      ),
+    ).toBe(true);
+    expect(
+      setValues.some(
+        (s) => s.key === 'security.auth.selectedType' && s.value === 'openai',
+      ),
+    ).toBe(true);
+    expect(
+      setValues.some(
+        (s) => s.key === 'model.name' && s.value === 'claude-3-5-sonnet',
+      ),
+    ).toBe(true);
+    expect(
+      setValues.some(
+        (s) =>
+          s.key === 'modelProviders.openai' &&
+          Array.isArray(s.value) &&
+          (s.value as Array<{ id: string }>)[0]?.id === 'claude-3-5-sonnet',
+      ),
+    ).toBe(true);
   });
 
-  it('exits with code 1 on fatal errors', async () => {
-    const { mkdirSync } = await import('node:fs');
-    vi.mocked(mkdirSync).mockImplementation(() => {
-      throw new Error('permission denied');
-    });
+  it('configures MinerU token', async () => {
+    promptQueue.push(
+      { action: 'keys' },
+      { action: 'add' },
+      { format: 'openai' },
+      { baseUrl: '' },
+      { modelId: 'gpt-4o' },
+      { apiKey: 'sk-test' },
+      { action: 'back' },
+      { action: 'mineru' },
+      { token: 'mineru-token' },
+      { action: 'done' },
+    );
 
-    await expect(runGlobalSetup()).rejects.toThrow('process.exit');
+    await runGlobalSetup();
+
     expect(
-      stderrLines.some((m) => m.includes('Failed to setup global config')),
+      setValues.some(
+        (s) => s.key === 'env.MINERU_API_KEY' && s.value === 'mineru-token',
+      ),
+    ).toBe(true);
+  });
+
+  it('configures AMiner token', async () => {
+    promptQueue.push(
+      { action: 'keys' },
+      { action: 'add' },
+      { format: 'openai' },
+      { baseUrl: '' },
+      { modelId: 'gpt-4o' },
+      { apiKey: 'sk-test' },
+      { action: 'back' },
+      { action: 'aminer' },
+      { token: 'aminer-token' },
+      { action: 'done' },
+    );
+
+    await runGlobalSetup();
+
+    expect(
+      setValues.some(
+        (s) => s.key === 'env.AMINER_API_KEY' && s.value === 'aminer-token',
+      ),
     ).toBe(true);
   });
 });

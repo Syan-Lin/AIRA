@@ -77,6 +77,7 @@ fi
 
 - If `${AMINER_API_KEY}` exists: proceed with the query.
 - If `${AMINER_API_KEY}` is not set: stop immediately and guide the user to the [AMiner Console](https://open.aminer.cn/open/board?tab=control) to generate one. For help, see the [Open Platform Documentation](https://open.aminer.cn/open/docs).
+  - You can also suggest the user run `aira setup` to configure the `AMINER_API_KEY` environment variable.
 - If the user provides `AMINER_API_KEY` inline (e.g. "My token is xxx"), accept it for the current session, but recommend setting it as an environment variable for better security.
 
 ## Invocation Style

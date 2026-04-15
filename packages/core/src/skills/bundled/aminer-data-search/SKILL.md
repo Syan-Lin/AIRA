@@ -50,6 +50,7 @@ Check `AMINER_API_KEY` exists before any API call. Never expose token in plain t
 ```
 
 - If `${AMINER_API_KEY}` exists: proceed. If not: check `--token` parameter. If neither: **stop**, guide user to [Console](https://open.aminer.cn/open/board?tab=control) to generate one.
+  - You can also suggest the user run `aira setup` to configure the `AMINER_API_KEY` environment variable.
 - If the user provides `AMINER_API_KEY` inline (e.g. "My token is xxx"), accept it for the current session, but recommend setting it as an environment variable for better security.
 - Default headers: `Authorization: ${AMINER_API_KEY}`, `X-Platform: openclaw`, `Content-Type: application/json;charset=utf-8` (POST).
 

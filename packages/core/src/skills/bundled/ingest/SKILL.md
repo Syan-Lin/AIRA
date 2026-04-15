@@ -176,6 +176,8 @@ curl -fsSL https://cdn-mineru.openxlab.org.cn/open-api-cli/install.sh | sh
 mineru-open-api auth
 ```
 
+或者建议用户运行 `aira setup` 来配置 `MINERU_API_KEY` 环境变量。
+
 ### 使用方式
 
 ```bash
