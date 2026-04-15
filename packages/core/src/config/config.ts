@@ -665,7 +665,7 @@ export class Config {
     this.sdkMode = params.sdkMode ?? false;
     this.userMemory = params.userMemory ?? '';
     this.geminiMdFileCount = params.geminiMdFileCount ?? 0;
-    this.approvalMode = params.approvalMode ?? ApprovalMode.DEFAULT;
+    this.approvalMode = params.approvalMode ?? ApprovalMode.AUTO_EDIT;
     this.accessibility = params.accessibility ?? {};
     this.telemetrySettings = {
       enabled: params.telemetry?.enabled ?? false,

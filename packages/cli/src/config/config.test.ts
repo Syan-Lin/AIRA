@@ -1017,7 +1017,7 @@ describe('loadCliConfig telemetry', () => {
 });
 
 describe('mergeExcludeTools', () => {
-  const defaultExcludes = [ShellTool.Name, EditTool.Name, WriteFileTool.Name];
+  const defaultExcludes = [ShellTool.Name];
   const originalIsTTY = process.stdin.isTTY;
 
   beforeEach(() => {
@@ -1073,7 +1073,7 @@ describe('Approval mode tool exclusion logic', () => {
     process.stdin.isTTY = originalIsTTY;
   });
 
-  it('should exclude all interactive tools in non-interactive mode with default approval mode', async () => {
+  it('should exclude only shell in non-interactive mode with auto-edit approval mode (new default)', async () => {
     process.argv = ['node', 'script.js', '-p', 'test'];
     const argv = await parseArguments();
     const settings: Settings = {};
@@ -1081,8 +1081,8 @@ describe('Approval mode tool exclusion logic', () => {
 
     const excludedTools = config.getPermissionsDeny();
     expect(excludedTools).toContain(ShellTool.Name);
-    expect(excludedTools).toContain(EditTool.Name);
-    expect(excludedTools).toContain(WriteFileTool.Name);
+    expect(excludedTools).not.toContain(EditTool.Name);
+    expect(excludedTools).not.toContain(WriteFileTool.Name);
   });
 
   it('should exclude all interactive tools in non-interactive mode with plan approval mode', async () => {
@@ -1137,8 +1137,9 @@ describe('Approval mode tool exclusion logic', () => {
 
     const excludedTools = config.getPermissionsDeny();
     expect(excludedTools).not.toContain(ShellTool.Name);
-    expect(excludedTools).toContain(EditTool.Name);
-    expect(excludedTools).toContain(WriteFileTool.Name);
+    // In auto-edit mode (new default), edit/write are not excluded in non-interactive mode
+    expect(excludedTools).not.toContain(EditTool.Name);
+    expect(excludedTools).not.toContain(WriteFileTool.Name);
   });
 
   it('should not exclude a tool explicitly allowed in tools.core', async () => {
@@ -1154,8 +1155,9 @@ describe('Approval mode tool exclusion logic', () => {
 
     const excludedTools = config.getPermissionsDeny();
     expect(excludedTools).not.toContain(ShellTool.Name);
-    expect(excludedTools).toContain(EditTool.Name);
-    expect(excludedTools).toContain(WriteFileTool.Name);
+    // In auto-edit mode (new default), edit/write are not excluded in non-interactive mode
+    expect(excludedTools).not.toContain(EditTool.Name);
+    expect(excludedTools).not.toContain(WriteFileTool.Name);
   });
 
   it('should exclude only shell tools in non-interactive mode with auto-edit approval mode', async () => {
@@ -1861,14 +1863,14 @@ describe('loadCliConfig tool exclusions', () => {
     expect(config.getPermissionsDeny()).not.toContain('write_file');
   });
 
-  it('should exclude interactive tools in non-interactive mode without YOLO', async () => {
+  it('should exclude shell in non-interactive mode without YOLO (auto-edit default)', async () => {
     process.stdin.isTTY = false;
     process.argv = ['node', 'script.js', '-p', 'test'];
     const argv = await parseArguments();
     const config = await loadCliConfig({}, argv, undefined, []);
     expect(config.getPermissionsDeny()).toContain('run_shell_command');
-    expect(config.getPermissionsDeny()).toContain('edit');
-    expect(config.getPermissionsDeny()).toContain('write_file');
+    expect(config.getPermissionsDeny()).not.toContain('edit');
+    expect(config.getPermissionsDeny()).not.toContain('write_file');
   });
 
   it('should not exclude interactive tools in non-interactive mode with YOLO', async () => {
@@ -1987,11 +1989,11 @@ describe('loadCliConfig approval mode', () => {
     vi.restoreAllMocks();
   });
 
-  it('should default to DEFAULT approval mode when no flags are set', async () => {
+  it('should default to AUTO_EDIT approval mode when no flags are set', async () => {
     process.argv = ['node', 'script.js'];
     const argv = await parseArguments();
     const config = await loadCliConfig({}, argv, undefined, []);
-    expect(config.getApprovalMode()).toBe(ServerConfig.ApprovalMode.DEFAULT);
+    expect(config.getApprovalMode()).toBe(ServerConfig.ApprovalMode.AUTO_EDIT);
   });
 
   it('should set PLAN approval mode when --approval-mode=plan', async () => {

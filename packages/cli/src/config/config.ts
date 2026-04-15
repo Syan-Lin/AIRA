@@ -779,7 +779,7 @@ export async function loadCliConfig(
   } else if (settings.tools?.approvalMode) {
     approvalMode = parseApprovalModeValue(settings.tools.approvalMode);
   } else {
-    approvalMode = ApprovalMode.DEFAULT;
+    approvalMode = ApprovalMode.AUTO_EDIT;
   }
 
   // Force approval mode to default if the folder is not trusted.
