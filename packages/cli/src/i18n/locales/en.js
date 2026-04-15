@@ -2042,4 +2042,28 @@ export default {
     'Not in plan mode. Use "/plan" to enter plan mode first.',
 
   "Set up Qwen Code's status line UI": "Set up Qwen Code's status line UI",
+
+  // Init / Setup commands
+  'Initialize an AIRA project in the current directory':
+    'Initialize an AIRA project in the current directory',
+  'Target directory for the AIRA project':
+    'Target directory for the AIRA project',
+  'Initializing AIRA project in {{dir}}...':
+    'Initializing AIRA project in {{dir}}...',
+  'Created {{file}}': 'Created {{file}}',
+  'Skipped existing {{file}}': 'Skipped existing {{file}}',
+  'Initialized git repository.': 'Initialized git repository.',
+  'Git repository already exists.': 'Git repository already exists.',
+  'Git initialization skipped.': 'Git initialization skipped.',
+  'AIRA project initialized successfully.':
+    'AIRA project initialized successfully.',
+  'Failed to initialize project: {{error}}':
+    'Failed to initialize project: {{error}}',
+  'Set up global AIRA configuration': 'Set up global AIRA configuration',
+  'Setting up global AIRA configuration in {{dir}}...':
+    'Setting up global AIRA configuration in {{dir}}...',
+  'Global AIRA configuration completed.':
+    'Global AIRA configuration completed.',
+  'Failed to setup global config: {{error}}':
+    'Failed to setup global config: {{error}}',
 };
