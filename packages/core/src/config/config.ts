@@ -65,9 +65,6 @@ import { WebFetchTool } from '../tools/web-fetch.js';
 import { WebSearchTool } from '../tools/web-search/index.js';
 import { WriteFileTool } from '../tools/write-file.js';
 import { LspTool } from '../tools/lsp.js';
-import { CronCreateTool } from '../tools/cron-create.js';
-import { CronListTool } from '../tools/cron-list.js';
-import { CronDeleteTool } from '../tools/cron-delete.js';
 import type { LspClient } from '../lsp/types.js';
 
 // Other modules
@@ -2306,13 +2303,6 @@ export class Config {
     if (this.isLspEnabled() && this.getLspClient()) {
       // Register the unified LSP tool
       await registerCoreTool(LspTool, this);
-    }
-
-    // Register cron tools unless disabled
-    if (this.isCronEnabled()) {
-      await registerCoreTool(CronCreateTool, this);
-      await registerCoreTool(CronListTool, this);
-      await registerCoreTool(CronDeleteTool, this);
     }
 
     if (!options?.skipDiscovery) {
