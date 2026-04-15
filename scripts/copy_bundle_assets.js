@@ -72,6 +72,16 @@ if (existsSync(bundledSkillsDir)) {
   );
 }
 
+// Copy i18n locale files so bundled cli.js can load translations at runtime.
+const localesDir = join(root, 'packages', 'cli', 'src', 'i18n', 'locales');
+if (existsSync(localesDir)) {
+  const destLocalesDir = join(distDir, 'locales');
+  copyRecursiveSync(localesDir, destLocalesDir);
+  console.log('Copied locale files to dist/locales/');
+} else {
+  console.warn(`Warning: Locales directory not found at ${localesDir}`);
+}
+
 console.log('\n✅ All bundle assets copied to dist/');
 
 /**

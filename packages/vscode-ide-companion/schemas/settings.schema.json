@@ -84,7 +84,7 @@
             "pt",
             "fr"
           ],
-          "default": "auto"
+          "default": "zh"
         },
         "outputLanguage": {
           "description": "The language for LLM output. Use \"auto\" to detect from system settings, or set a specific language.",

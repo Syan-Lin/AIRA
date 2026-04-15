@@ -1647,39 +1647,39 @@ export default {
   // ============================================================================
   WITTY_LOADING_PHRASES: [
     // --- Lab Life ---
-    'Running the 101st control experiment. This time it will be significant...',
-    'The PI is watching. The server is terrified...',
-    'Western blot transferring. Data loading...',
-    'Pipetting samples into the GPU. Please wait...',
-    'Cells are still incubating. Results pending...',
+    'Running the 101st ablation study. This time the score will improve...',
+    'The advisor is watching. The GPU dares not drop below 90% utilization...',
+    'Dataset decompressing. Inspiration loading...',
+    'Pipetting environment packages into the server with pip. Please wait...',
+    'Model still converging. Results pending...',
 
     // --- Papers & Publishing ---
-    'Reviewer 2 is inspecting this code. Pressure is on...',
-    'Adjusting p=0.051 to p=0.049. Magic in progress...',
-    'Paper transitioning from Major Revision to Accept...',
-    'Reference formatting is still broken. Loading delay expected...',
-    'Fig.1 color scheme is having an existential crisis...',
+    'Reviewer 2 is inspecting this code. The pressure is on...',
+    'Turning accuracy 0.512 into SOTA. Magic in progress...',
+    'Paper transitioning from Reject to Accept (hopefully)...',
+    'LaTeX compilation failed. References are fighting...',
+    'Figure 2 loss curve is doing its best to look smooth...',
 
     // --- Academic Self-Deprecation ---
-    "If I don't run the plagiarism check, the similarity index is 0%...",
-    'My hair and my p-value are both dropping...',
-    'The Nobel Committee is currently debating my loading speed...',
-    'Reframing negative results as a groundbreaking discovery...',
-    'Protocol from last year is lost. Loading on pure intuition...',
+    "If I don't run the baseline, I am the baseline...",
+    'My hair and my learning rate are both decaying...',
+    'NeurIPS reviewers are currently debating my loading speed...',
+    'Repackaging negative samples as hard negatives...',
+    "Last year's checkpoint is lost. Loading from memory...",
 
-    // --- Data & Computation ---
-    'The server is deep-learning how not to crash...',
-    'The data is already significant. Just waiting for the alpha level to agree...',
-    'Processing big data in Excel. Admirable courage...',
-    'Grant proposal half-written. Loading some inspiration first...',
-    'Python is importing the entire universe. Please be patient...',
+    // --- Data & Training ---
+    'The server is deep-learning how not to CUDA OOM...',
+    'Gradient has already descended. Just waiting for early stopping to agree...',
+    'Drawing neural networks in Excel. Admirable courage...',
+    'Grant proposal stuck at Related Work. Loading inspiration first...',
+    'Python is importing the entire deep-learning universe. Please be patient...',
 
-    // --- Scientific Idealism ---
-    'Every great hypothesis deserves a moment of patience...',
-    'On the road to science, even the progress bar moves forward...',
-    'Take your time. Truth always needs a moment to become significant...',
-    'May your experiments be reproducible and your hypotheses unfalsified...',
-    'Even 0.1% progress is a step closer to Nature...',
+    // --- Academic Idealism ---
+    'Every great model deserves a patient training run...',
+    'On the road to AI, even the progress bar is self-optimizing...',
+    'Take your time. Loss always needs a moment to converge...',
+    'May your experiments be reproducible and your ablations unquestioned...',
+    'Even 0.1% progress is a step closer to Best Paper...',
   ],
 
   // ============================================================================
