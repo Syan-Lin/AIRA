@@ -118,6 +118,16 @@ export class SkillManager {
       );
 
       for (const skill of levelSkills) {
+        // Skip bundled skills unless explicitly requested
+        if (
+          skill.level === 'bundled' &&
+          options.level !== 'bundled' &&
+          options.includeBundled !== true
+        ) {
+          debugLogger.debug(`Skipping bundled skill: ${skill.name}`);
+          continue;
+        }
+
         // Skip if we've already seen this name (precedence: project > user > extension > bundled)
         if (seenNames.has(skill.name)) {
           debugLogger.debug(

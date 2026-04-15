@@ -677,11 +677,24 @@ Review content`);
       });
     }
 
-    it('should load bundled skills in listSkills', async () => {
+    it('should hide bundled skills in listSkills by default', async () => {
       mockReaddirForLevels(new Set(['bundled']));
       setupReviewSkillMocks();
 
       const skills = await manager.listSkills({ force: true });
+
+      expect(skills.some((s) => s.name === 'review')).toBe(false);
+      expect(skills).toHaveLength(0);
+    });
+
+    it('should load bundled skills in listSkills when includeBundled is true', async () => {
+      mockReaddirForLevels(new Set(['bundled']));
+      setupReviewSkillMocks();
+
+      const skills = await manager.listSkills({
+        force: true,
+        includeBundled: true,
+      });
 
       expect(skills.some((s) => s.name === 'review')).toBe(true);
       const reviewSkill = skills.find((s) => s.name === 'review');
@@ -692,7 +705,10 @@ Review content`);
       mockReaddirForLevels(new Set(['project', 'bundled']));
       setupReviewSkillMocks();
 
-      const skills = await manager.listSkills({ force: true });
+      const skills = await manager.listSkills({
+        force: true,
+        includeBundled: true,
+      });
 
       const reviewSkills = skills.filter((s) => s.name === 'review');
       expect(reviewSkills).toHaveLength(1);
@@ -703,7 +719,10 @@ Review content`);
       mockReaddirForLevels(new Set(['user', 'bundled']));
       setupReviewSkillMocks();
 
-      const skills = await manager.listSkills({ force: true });
+      const skills = await manager.listSkills({
+        force: true,
+        includeBundled: true,
+      });
 
       const reviewSkills = skills.filter((s) => s.name === 'review');
       expect(reviewSkills).toHaveLength(1);

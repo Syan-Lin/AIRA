@@ -110,6 +110,9 @@ export interface ListSkillsOptions {
 
   /** Force refresh from disk, bypassing cache. Defaults to false. */
   force?: boolean;
+
+  /** Include bundled skills in the result. Defaults to false. */
+  includeBundled?: boolean;
 }
 
 /**
