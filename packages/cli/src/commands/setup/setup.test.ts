@@ -147,7 +147,8 @@ describe('runGlobalSetup', () => {
     ).toBe(true);
     expect(
       setValues.some(
-        (s) => s.key === 'security.auth.selectedType' && s.value === 'openai',
+        (s) =>
+          s.key === 'security.auth.selectedType' && s.value === 'anthropic',
       ),
     ).toBe(true);
     expect(
@@ -158,7 +159,7 @@ describe('runGlobalSetup', () => {
     expect(
       setValues.some(
         (s) =>
-          s.key === 'modelProviders.openai' &&
+          s.key === 'modelProviders.anthropic' &&
           Array.isArray(s.value) &&
           (s.value as Array<{ id: string }>)[0]?.id === 'claude-3-5-sonnet',
       ),

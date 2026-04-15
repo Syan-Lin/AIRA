@@ -109,11 +109,22 @@ export async function runGlobalSetup(): Promise<void> {
   writeStdoutLine(t('Global AIRA configuration completed.'));
 }
 
-function getApiKeys(settings: LoadedSettings): ModelConfig[] {
+function getApiKeys(
+  settings: LoadedSettings,
+): Array<ModelConfig & { authType: AuthType }> {
   const providers = settings.merged.modelProviders as
     | Record<string, ModelConfig[]>
     | undefined;
-  return providers?.[AuthType.USE_OPENAI] ?? [];
+  if (!providers) return [];
+  const result: Array<ModelConfig & { authType: AuthType }> = [];
+  for (const [authType, configs] of Object.entries(providers)) {
+    if (configs && Array.isArray(configs)) {
+      for (const c of configs) {
+        result.push({ ...c, authType: authType as AuthType });
+      }
+    }
+  }
+  return result;
 }
 
 async function manageApiKeys(settings: LoadedSettings): Promise<void> {
@@ -131,7 +142,7 @@ async function manageApiKeys(settings: LoadedSettings): Promise<void> {
       for (let i = 0; i < keys.length; i++) {
         const k = keys[i];
         choices.push({
-          title: `${k.id} (${k.baseUrl ?? 'default'})`,
+          title: `[${k.authType}] ${k.id} (${k.baseUrl ?? 'default'})`,
           value: `view-${i}`,
           disabled: true,
         });
@@ -188,6 +199,9 @@ async function addApiKey(settings: LoadedSettings): Promise<void> {
   if (formatResp.format === undefined) return;
   const format = formatResp.format as ApiKeyFormat;
 
+  const authType =
+    format === 'anthropic' ? AuthType.USE_ANTHROPIC : AuthType.USE_OPENAI;
+
   const baseUrlResp = await prompts({
     type: 'text',
     name: 'baseUrl',
@@ -242,20 +256,16 @@ async function addApiKey(settings: LoadedSettings): Promise<void> {
     envKey: envKeyName,
   };
 
-  const existing = getApiKeys(settings);
+  const providers =
+    (settings.merged.modelProviders as
+      | Record<string, ModelConfig[]>
+      | undefined) ?? {};
+  const existing = providers[authType] ?? [];
   const updated = [...existing, newConfig];
 
   settings.setValue(SettingScope.User, `env.${envKeyName}`, apiKey);
-  settings.setValue(
-    SettingScope.User,
-    `modelProviders.${AuthType.USE_OPENAI}`,
-    updated,
-  );
-  settings.setValue(
-    SettingScope.User,
-    'security.auth.selectedType',
-    AuthType.USE_OPENAI,
-  );
+  settings.setValue(SettingScope.User, `modelProviders.${authType}`, updated);
+  settings.setValue(SettingScope.User, 'security.auth.selectedType', authType);
   settings.setValue(SettingScope.User, 'model.name', modelId);
 
   // Sync to process.env immediately so any subsequent auth checks pass
@@ -281,14 +291,29 @@ async function deleteApiKey(
 
   if (!confirm.value) return;
 
-  const updated = existing.filter((_, i) => i !== index);
-  settings.setValue(
-    SettingScope.User,
-    `modelProviders.${AuthType.USE_OPENAI}`,
-    updated,
-  );
+  const providers =
+    (settings.merged.modelProviders as
+      | Record<string, ModelConfig[]>
+      | undefined) ?? {};
+  const authType = target.authType;
+  const updated = (providers[authType] ?? []).filter((_, i) => {
+    // Recompute index within this authType by counting preceding entries with same authType
+    let count = 0;
+    for (let j = 0; j < existing.length; j++) {
+      if (existing[j].authType === authType) {
+        if (j === index) {
+          return i !== count;
+        }
+        count++;
+      }
+    }
+    return true;
+  });
 
-  if (updated.length === 0) {
+  settings.setValue(SettingScope.User, `modelProviders.${authType}`, updated);
+
+  const remaining = getApiKeys(settings);
+  if (remaining.length === 0) {
     settings.setValue(
       SettingScope.User,
       'security.auth.selectedType',
