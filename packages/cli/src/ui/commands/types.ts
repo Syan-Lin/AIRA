@@ -84,6 +84,8 @@ export interface CommandContext {
     toggleVimEnabled: () => Promise<boolean>;
     setGeminiMdFileCount: (count: number) => void;
     reloadCommands: () => void;
+    /** Force remount the main UI to apply language/theme changes immediately. */
+    remount?: () => void;
     extensionsUpdateState: Map<string, ExtensionUpdateStatus>;
     dispatchExtensionStateUpdate: (action: ExtensionUpdateAction) => void;
     addConfirmUpdateExtensionRequest: (value: ConfirmationRequest) => void;

@@ -272,6 +272,7 @@ export const useSlashCommandProcessor = (
         toggleVimEnabled,
         setGeminiMdFileCount,
         reloadCommands,
+        remount: refreshStatic,
         extensionsUpdateState,
         dispatchExtensionStateUpdate: actions.dispatchExtensionStateUpdate,
         addConfirmUpdateExtensionRequest:

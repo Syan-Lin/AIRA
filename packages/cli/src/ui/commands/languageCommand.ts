@@ -110,6 +110,9 @@ async function setUiLanguage(
   // Reload commands to update localized descriptions
   context.ui.reloadCommands();
 
+  // Force remount so already-rendered UI components pick up the new language
+  context.ui.remount?.();
+
   return {
     type: 'message',
     messageType: 'info',

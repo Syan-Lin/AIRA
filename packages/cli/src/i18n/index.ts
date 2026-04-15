@@ -71,7 +71,7 @@ export function detectSystemLanguage(): SupportedLanguage {
     // Fallback to default
   }
 
-  return 'en';
+  return 'zh';
 }
 
 // Translation loading

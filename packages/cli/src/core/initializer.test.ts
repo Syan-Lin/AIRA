@@ -106,7 +106,7 @@ describe('initializeApp', () => {
     );
 
     expect(result.authError).toBe('Auth failed');
-    expect(result.shouldOpenAuthDialog).toBe(true);
+    expect(result.shouldOpenAuthDialog).toBe(false);
     // initializeApp does not clear the selected auth type on failure
     expect(mockSettings.setValue).not.toHaveBeenCalled();
   });
@@ -122,7 +122,7 @@ describe('initializeApp', () => {
     expect(result.themeError).toBe('Theme not found');
   });
 
-  it('should set shouldOpenAuthDialog when auth was not explicitly provided', async () => {
+  it('should not open auth dialog because AIRA skips it', async () => {
     mockConfig
       .getModelsConfig()
       .wasAuthTypeExplicitlyProvided.mockReturnValue(false);
@@ -132,10 +132,10 @@ describe('initializeApp', () => {
       mockSettings as never,
     );
 
-    expect(result.shouldOpenAuthDialog).toBe(true);
+    expect(result.shouldOpenAuthDialog).toBe(false);
   });
 
-  it('should set shouldOpenAuthDialog when auth error occurs', async () => {
+  it('should not open auth dialog when auth error occurs because AIRA skips it', async () => {
     mockConfig
       .getModelsConfig()
       .wasAuthTypeExplicitlyProvided.mockReturnValue(true);
@@ -146,7 +146,7 @@ describe('initializeApp', () => {
       mockSettings as never,
     );
 
-    expect(result.shouldOpenAuthDialog).toBe(true);
+    expect(result.shouldOpenAuthDialog).toBe(false);
   });
 
   it('should not open auth dialog when auth was explicitly provided and succeeds', async () => {
@@ -180,11 +180,11 @@ describe('initializeApp', () => {
     expect(mockGetInstance).not.toHaveBeenCalled();
   });
 
-  it('should default language to auto when no setting is provided', async () => {
+  it('should default language to zh when no setting is provided', async () => {
     mockSettings.merged = {};
 
     await initializeApp(mockConfig as never, mockSettings as never);
 
-    expect(mockInitializeI18n).toHaveBeenCalledWith('auto');
+    expect(mockInitializeI18n).toHaveBeenCalledWith('zh');
   });
 });

@@ -38,7 +38,7 @@ export async function initializeApp(
   const languageSetting =
     process.env['QWEN_CODE_LANG'] ||
     (settings.merged.general?.language as string) ||
-    'auto';
+    'zh';
   await initializeI18n(languageSetting as SupportedLanguage | 'auto');
 
   // Use authType from modelsConfig which respects CLI --auth-type argument
