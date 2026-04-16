@@ -82,16 +82,16 @@ export default {
   'For a full list of shortcuts, see {{docPath}}':
     'For a full list of shortcuts, see {{docPath}}',
   'docs/keyboard-shortcuts.md': 'docs/keyboard-shortcuts.md',
-  'for help on Qwen Code': 'for help on Qwen Code',
+  'for help on AIRA': 'for help on AIRA',
   'show version info': 'show version info',
   'submit a bug report': 'submit a bug report',
-  'About Qwen Code': 'About Qwen Code',
+  'About AIRA': 'About AIRA',
   Status: 'Status',
 
   // ============================================================================
   // System Information Fields
   // ============================================================================
-  'Qwen Code': 'Qwen Code',
+  'AIRA': 'AIRA',
   Runtime: 'Runtime',
   OS: 'OS',
   Auth: 'Auth',
@@ -116,10 +116,10 @@ export default {
   // ============================================================================
   'Analyzes the project and creates a tailored QWEN.md file.':
     'Analyzes the project and creates a tailored QWEN.md file.',
-  'List available Qwen Code tools. Usage: /tools [desc]':
-    'List available Qwen Code tools. Usage: /tools [desc]',
+  'list available AIRA tools. Usage: /tools [desc]':
+    'list available AIRA tools. Usage: /tools [desc]',
   'List available skills.': 'List available skills.',
-  'Available Qwen Code CLI tools:': 'Available Qwen Code CLI tools:',
+  'Available Qwen Code CLI tools:': 'Available AIRA CLI tools:',
   'No tools available': 'No tools available',
   'View or change the approval mode for tool usage':
     'View or change the approval mode for tool usage',
@@ -143,8 +143,8 @@ export default {
     'Clear conversation history and free up context',
   'Compresses the context by replacing it with a summary.':
     'Compresses the context by replacing it with a summary.',
-  'open full Qwen Code documentation in your browser':
-    'open full Qwen Code documentation in your browser',
+  'open full AIRA documentation in your browser':
+    'open full AIRA documentation in your browser',
   'Configuration not available.': 'Configuration not available.',
   'change the auth method': 'change the auth method',
   'Configure authentication information for login':
@@ -234,7 +234,7 @@ export default {
   'Step {{n}}: Choose Generation Method':
     'Step {{n}}: Choose Generation Method',
   'Generate with Qwen Code (Recommended)':
-    'Generate with Qwen Code (Recommended)',
+    'Generate with AIRA (Recommended)',
   'Manual Creation': 'Manual Creation',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)',
@@ -360,10 +360,10 @@ export default {
   // ============================================================================
   // Commands - General (continued)
   // ============================================================================
-  'View and edit Qwen Code settings': 'View and edit Qwen Code settings',
+  'View and edit AIRA settings': 'View and edit AIRA settings',
   Settings: 'Settings',
   'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.':
-    'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.',
+    'To see changes, AIRA must be restarted. Press r to exit and apply changes now.',
   'The command "/{{command}}" is not supported in non-interactive mode.':
     'The command "/{{command}}" is not supported in non-interactive mode.',
   // ============================================================================
@@ -518,8 +518,8 @@ export default {
     'This extension will install the following subagents:',
   'Installation cancelled for "{{name}}".':
     'Installation cancelled for "{{name}}".',
-  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Qwen Code.':
-    'You are installing an extension from {{originSource}}. Some features may not work perfectly with Qwen Code.',
+  'You are installing an extension from {{originSource}}. Some features may not work perfectly with AIRA.':
+    'You are installing an extension from {{originSource}}. Some features may not work perfectly with AIRA.',
   '--ref and --auto-update are not applicable for marketplace extensions.':
     '--ref and --auto-update are not applicable for marketplace extensions.',
   'Extension "{{name}}" installed successfully and enabled.':
@@ -630,7 +630,7 @@ export default {
   'enable IDE integration': 'enable IDE integration',
   'disable IDE integration': 'disable IDE integration',
   'IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks.':
-    'IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks.',
+    'IDE integration is not supported in your current environment. To use this feature, run AIRA in one of these supported IDEs: VS Code or VS Code forks.',
   'Set up GitHub Actions': 'Set up GitHub Actions',
   'Configure terminal keybindings for multiline input (VS Code, Cursor, Windsurf, Trae)':
     'Configure terminal keybindings for multiline input (VS Code, Cursor, Windsurf, Trae)',
@@ -664,7 +664,7 @@ export default {
   // ============================================================================
   // Commands - Hooks
   // ============================================================================
-  'Manage Qwen Code hooks': 'Manage Qwen Code hooks',
+  'Manage AIRA hooks': 'Manage AIRA hooks',
   'List all configured hooks': 'List all configured hooks',
   'Enable a disabled hook': 'Enable a disabled hook',
   'Disable an active hook': 'Disable an active hook',
@@ -683,14 +683,14 @@ export default {
   '{{count}} hook configured': '{{count}} hook configured',
   '{{count}} hooks configured': '{{count}} hooks configured',
   'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Qwen Code.':
-    'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Qwen Code.',
+    'This menu is read-only. To add or modify hooks, edit settings.json directly or ask AIRA.',
   'Enter to select · Esc to cancel': 'Enter to select · Esc to cancel',
   // Hooks - Detail Step
   'Exit codes:': 'Exit codes:',
   'Configured hooks:': 'Configured hooks:',
   'No hooks configured for this event.': 'No hooks configured for this event.',
   'To add hooks, edit settings.json directly or ask Qwen.':
-    'To add hooks, edit settings.json directly or ask Qwen.',
+    'To add hooks, edit settings.json directly or ask AIRA.',
   'Enter to select · Esc to go back': 'Enter to select · Esc to go back',
   // Hooks - Config Detail Step
   'Hook details': 'Hook details',
@@ -712,7 +712,7 @@ export default {
   'Tool operations will proceed without hook validation':
     'Tool operations will proceed without hook validation',
   'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Qwen Code.':
-    'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Qwen Code.',
+    'To re-enable hooks, remove "disableAllHooks" from settings.json or ask AIRA.',
   // Hooks - Source
   Project: 'Project',
   User: 'User',
@@ -732,8 +732,8 @@ export default {
   'When notifications are sent': 'When notifications are sent',
   'When the user submits a prompt': 'When the user submits a prompt',
   'When a new session is started': 'When a new session is started',
-  'Right before Qwen Code concludes its response':
-    'Right before Qwen Code concludes its response',
+  'Right before AIRA concludes its response':
+    'Right before AIRA concludes its response',
   'When a subagent (Agent tool call) is started':
     'When a subagent (Agent tool call) is started',
   'Right before a subagent concludes its response':
@@ -1408,11 +1408,11 @@ export default {
   Deny: 'Deny',
   Workspace: 'Workspace',
   "Qwen Code won't ask before using allowed tools.":
-    "Qwen Code won't ask before using allowed tools.",
+    "AIRA won't ask before using allowed tools.",
   'Qwen Code will ask before using these tools.':
-    'Qwen Code will ask before using these tools.',
+    'AIRA will ask before using these tools.',
   'Qwen Code is not allowed to use denied tools.':
-    'Qwen Code is not allowed to use denied tools.',
+    'AIRA is not allowed to use denied tools.',
   'Manage trusted directories for this workspace.':
     'Manage trusted directories for this workspace.',
   'Any use of the {{tool}} tool': 'Any use of the {{tool}} tool',
@@ -1451,9 +1451,9 @@ export default {
   'Add directory…': 'Add directory…',
   'Add directory to workspace': 'Add directory to workspace',
   'Qwen Code can read files in the workspace, and make edits when auto-accept edits is on.':
-    'Qwen Code can read files in the workspace, and make edits when auto-accept edits is on.',
+    'AIRA can read files in the workspace, and make edits when auto-accept edits is on.',
   'Qwen Code will be able to read files in this directory and make edits when auto-accept edits is on.':
-    'Qwen Code will be able to read files in this directory and make edits when auto-accept edits is on.',
+    'AIRA will be able to read files in this directory and make edits when auto-accept edits is on.',
   'Enter the path to the directory:': 'Enter the path to the directory:',
   'Enter directory path…': 'Enter directory path…',
   'Tab to complete · Enter to add · Esc to cancel':
@@ -1543,8 +1543,8 @@ export default {
     'Use /bug to submit issues to the maintainers when something goes off.',
   'Switch auth type quickly with /auth.':
     'Switch auth type quickly with /auth.',
-  'You can run any shell commands from Qwen Code using ! (e.g. !ls).':
-    'You can run any shell commands from Qwen Code using ! (e.g. !ls).',
+  'You can run any shell commands from AIRA using ! (e.g. !ls).':
+    'You can run any shell commands from AIRA using ! (e.g. !ls).',
   'Type / to open the command popup; Tab autocompletes slash commands and saved prompts.':
     'Type / to open the command popup; Tab autocompletes slash commands and saved prompts.',
   'You can resume a previous conversation by running qwen --continue or qwen --resume.':
@@ -1555,8 +1555,8 @@ export default {
     'You can switch permission mode quickly with Tab or /approval-mode.',
   'Try /insight to generate personalized insights from your chat history.':
     'Try /insight to generate personalized insights from your chat history.',
-  'Add a QWEN.md file to give Qwen Code persistent project context.':
-    'Add a QWEN.md file to give Qwen Code persistent project context.',
+  'Add an AIRA.md file to give AIRA persistent project context.':
+    'Add an AIRA.md file to give AIRA persistent project context.',
   'Use /btw to ask a quick side question without disrupting the conversation.':
     'Use /btw to ask a quick side question without disrupting the conversation.',
   'Context is almost full! Run /compress now or start /new to continue.':
@@ -1569,7 +1569,7 @@ export default {
   // ============================================================================
   // Exit Screen / Stats
   // ============================================================================
-  'Agent powering down. Goodbye!': 'Agent powering down. Goodbye!',
+  'Agent powering down. Goodbye!': 'AIRA is shutting down. Goodbye!',
   'To continue this session, run': 'To continue this session, run',
   'Interaction Summary': 'Interaction Summary',
   'Session ID:': 'Session ID:',
@@ -1946,7 +1946,7 @@ export default {
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     'Not in plan mode. Use "/plan" to enter plan mode first.',
 
-  "Set up Qwen Code's status line UI": "Set up Qwen Code's status line UI",
+  "Set up AIRA's status line UI": "Set up AIRA's status line UI",
 
   // Init / Setup commands
   'Initialize an AIRA project in the current directory':
@@ -2006,4 +2006,22 @@ export default {
     "Failed to switch model to '{{model}}'.",
   'Please configure models in settings.modelProviders or use environment variables.':
     'Please configure models in settings.modelProviders or use environment variables.',
+
+  // Context usage display
+  '% used': '% used',
+  '% context used': '% context used',
+
+  // IDE integration nudge
+  'Do you want to connect {{ideName}} to AIRA?':
+    'Do you want to connect {{ideName}} to AIRA?',
+  'editor': 'editor',
+  'your editor': 'your editor',
+  "Note: In sandbox environments, IDE integration requires manual setup on the host system. If you select Yes, you'll receive instructions on how to set this up.":
+    "Note: In sandbox environments, IDE integration requires manual setup on the host system. If you select Yes, you'll receive instructions on how to set this up.",
+  'If you select Yes, the CLI will connect to your {{ideName}} and have access to your open files and display diffs directly.':
+    'If you select Yes, the CLI will connect to your {{ideName}} and have access to your open files and display diffs directly.',
+  'If you select Yes, we\'ll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.':
+    'If you select Yes, we\'ll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.',
+  'Yes': 'Yes',
+  "No, don't ask again": "No, don't ask again",
 };

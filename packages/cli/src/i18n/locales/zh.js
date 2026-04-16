@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// Chinese translations for Qwen Code CLI
+// Chinese translations for AIRA CLI
 
 export default {
   // ============================================================================
@@ -80,16 +80,16 @@ export default {
   'For a full list of shortcuts, see {{docPath}}':
     '完整快捷键列表，请参阅 {{docPath}}',
   'docs/keyboard-shortcuts.md': 'docs/keyboard-shortcuts.md',
-  'for help on Qwen Code': '获取 Qwen Code 帮助',
+  'for help on AIRA': '获取 AIRA 帮助',
   'show version info': '显示版本信息',
   'submit a bug report': '提交错误报告',
-  'About Qwen Code': '关于 Qwen Code',
+  'About AIRA': '关于 AIRA',
   Status: '状态',
 
   // ============================================================================
   // System Information Fields
   // ============================================================================
-  'Qwen Code': 'Qwen Code',
+  'AIRA': 'AIRA',
   Runtime: '运行时',
   OS: '操作系统',
   Auth: '认证',
@@ -115,10 +115,10 @@ export default {
   // ============================================================================
   'Analyzes the project and creates a tailored QWEN.md file.':
     '分析项目并创建定制的 QWEN.md 文件',
-  'List available Qwen Code tools. Usage: /tools [desc]':
-    '列出可用的 Qwen Code 工具。用法：/tools [desc]',
+  'list available AIRA tools. Usage: /tools [desc]':
+    '列出可用的 AIRA 工具。用法：/tools [desc]',
   'List available skills.': '列出可用技能。',
-  'Available Qwen Code CLI tools:': '可用的 Qwen Code CLI 工具：',
+  'Available Qwen Code CLI tools:': '可用的 AIRA CLI 工具：',
   'No tools available': '没有可用工具',
   'View or change the approval mode for tool usage':
     '查看或更改工具使用的审批模式',
@@ -141,8 +141,8 @@ export default {
   'Clear conversation history and free up context': '清除对话历史并释放上下文',
   'Compresses the context by replacing it with a summary.':
     '通过摘要替换来压缩上下文',
-  'open full Qwen Code documentation in your browser':
-    '在浏览器中打开完整的 Qwen Code 文档',
+  'open full AIRA documentation in your browser':
+    '在浏览器中打开完整的 AIRA 文档',
   'Configuration not available.': '配置不可用',
   'change the auth method': '更改认证方法',
   'Configure authentication information for login': '配置登录认证信息',
@@ -227,7 +227,7 @@ export default {
   // Agents - Creation Wizard Steps
   'Step {{n}}: Choose Location': '步骤 {{n}}: 选择位置',
   'Step {{n}}: Choose Generation Method': '步骤 {{n}}: 选择生成方式',
-  'Generate with Qwen Code (Recommended)': '使用 Qwen Code 生成（推荐）',
+  'Generate with Qwen Code (Recommended)': '使用 AIRA 生成（推荐）',
   'Manual Creation': '手动创建',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     '描述此子智能体应该做什么以及何时使用它。（为了获得最佳效果，请全面描述）',
@@ -344,10 +344,10 @@ export default {
   // ============================================================================
   // Commands - General (continued)
   // ============================================================================
-  'View and edit Qwen Code settings': '查看和编辑 Qwen Code 设置',
+  'View and edit AIRA settings': '查看和编辑 AIRA 设置',
   Settings: '设置',
   'To see changes, Qwen Code must be restarted. Press r to exit and apply changes now.':
-    '要查看更改，必须重启 Qwen Code。按 r 退出并立即应用更改。',
+    '要查看更改，必须重启 AIRA。按 r 退出并立即应用更改。',
   'The command "/{{command}}" is not supported in non-interactive mode.':
     '不支持在非交互模式下使用命令 "/{{command}}"。',
   // ============================================================================
@@ -493,8 +493,8 @@ export default {
   'This extension will install the following subagents:':
     '此扩展将安装以下子智能体：',
   'Installation cancelled for "{{name}}".': '已取消安装 "{{name}}"。',
-  'You are installing an extension from {{originSource}}. Some features may not work perfectly with Qwen Code.':
-    '您正在安装来自 {{originSource}} 的扩展。某些功能可能无法完美兼容 Qwen Code。',
+  'You are installing an extension from {{originSource}}. Some features may not work perfectly with AIRA.':
+    '您正在安装来自 {{originSource}} 的扩展。某些功能可能无法完美兼容 AIRA。',
   '--ref and --auto-update are not applicable for marketplace extensions.':
     '--ref 和 --auto-update 不适用于市场扩展。',
   'Extension "{{name}}" installed successfully and enabled.':
@@ -597,7 +597,7 @@ export default {
   'enable IDE integration': '启用 IDE 集成',
   'disable IDE integration': '禁用 IDE 集成',
   'IDE integration is not supported in your current environment. To use this feature, run Qwen Code in one of these supported IDEs: VS Code or VS Code forks.':
-    '您当前环境不支持 IDE 集成。要使用此功能，请在以下支持的 IDE 之一中运行 Qwen Code：VS Code 或 VS Code 分支版本。',
+    '您当前环境不支持 IDE 集成。要使用此功能，请在以下支持的 IDE 之一中运行 AIRA：VS Code 或 VS Code 分支版本。',
   'Set up GitHub Actions': '设置 GitHub Actions',
   'Configure terminal keybindings for multiline input (VS Code, Cursor, Windsurf, Trae)':
     '配置终端按键绑定以支持多行输入（VS Code、Cursor、Windsurf、Trae）',
@@ -629,7 +629,7 @@ export default {
   // ============================================================================
   // Commands - Hooks
   // ============================================================================
-  'Manage Qwen Code hooks': '管理 Qwen Code Hook',
+  'Manage AIRA hooks': '管理 AIRA Hook',
   'List all configured hooks': '列出所有已配置的 Hook',
   'Enable a disabled hook': '启用已禁用的 Hook',
   'Disable an active hook': '禁用已启用的 Hook',
@@ -647,14 +647,14 @@ export default {
   '{{count}} hook configured': '{{count}} 个 Hook 已配置',
   '{{count}} hooks configured': '{{count}} 个 Hook 已配置',
   'This menu is read-only. To add or modify hooks, edit settings.json directly or ask Qwen Code.':
-    '此菜单为只读。要添加或修改 Hook，请直接编辑 settings.json 或询问 Qwen Code。',
+    '此菜单为只读。要添加或修改 Hook，请直接编辑 settings.json 或询问 AIRA。',
   'Enter to select · Esc to cancel': 'Enter 选择 · Esc 取消',
   // Hooks - Detail Step
   'Exit codes:': '退出码：',
   'Configured hooks:': '已配置的 Hook：',
   'No hooks configured for this event.': '此事件未配置 Hook。',
   'To add hooks, edit settings.json directly or ask Qwen.':
-    '要添加 Hook，请直接编辑 settings.json 或询问 Qwen。',
+    '要添加 Hook，请直接编辑 settings.json 或询问 AIRA。',
   'Enter to select · Esc to go back': 'Enter 选择 · Esc 返回',
   // Hooks - Config Detail Step
   'Hook details': 'Hook 详情',
@@ -663,7 +663,7 @@ export default {
   'Desc:': '描述：',
   'No hook config selected': '未选择 Hook 配置',
   'To modify or remove this hook, edit settings.json directly or ask Qwen to help.':
-    '要修改或删除此 Hook，请直接编辑 settings.json 或询问 Qwen。',
+    '要修改或删除此 Hook，请直接编辑 settings.json 或询问 AIRA。',
   // Hooks - Disabled Step
   'Hook Configuration - Disabled': 'Hook 配置 - 已禁用',
   'All hooks are currently disabled. You have {{count}} that are not running.':
@@ -676,7 +676,7 @@ export default {
   'Tool operations will proceed without hook validation':
     '工具操作将在没有 Hook 验证的情况下继续',
   'To re-enable hooks, remove "disableAllHooks" from settings.json or ask Qwen Code.':
-    '要重新启用 Hook，请从 settings.json 中删除 "disableAllHooks" 或询问 Qwen Code。',
+    '要重新启用 Hook，请从 settings.json 中删除 "disableAllHooks" 或询问 AIRA。',
   // Hooks - Source
   Project: '项目',
   User: '用户',
@@ -696,7 +696,7 @@ export default {
   'When notifications are sent': '发送通知时',
   'When the user submits a prompt': '用户提交提示时',
   'When a new session is started': '新会话开始时',
-  'Right before Qwen Code concludes its response': 'Qwen Code 结束响应之前',
+  'Right before AIRA concludes its response': 'AIRA 结束响应之前',
   'When a subagent (Agent tool call) is started':
     '子智能体（Agent 工具调用）启动时',
   'Right before a subagent concludes its response': '子智能体结束响应之前',
@@ -1332,11 +1332,11 @@ export default {
   Deny: '拒绝',
   Workspace: '工作区',
   "Qwen Code won't ask before using allowed tools.":
-    'Qwen Code 使用已允许的工具前不会询问。',
+    'AIRA 使用已允许的工具前不会询问。',
   'Qwen Code will ask before using these tools.':
-    'Qwen Code 使用这些工具前会先询问。',
+    'AIRA 使用这些工具前会先询问。',
   'Qwen Code is not allowed to use denied tools.':
-    'Qwen Code 不允许使用被拒绝的工具。',
+    'AIRA 不允许使用被拒绝的工具。',
   'Manage trusted directories for this workspace.':
     '管理此工作区的受信任目录。',
   'Any use of the {{tool}} tool': '{{tool}} 工具的任何使用',
@@ -1375,9 +1375,9 @@ export default {
   'Add directory…': '添加目录…',
   'Add directory to workspace': '添加工作区目录',
   'Qwen Code can read files in the workspace, and make edits when auto-accept edits is on.':
-    'Qwen Code 可以读取工作区中的文件，并在自动接受编辑模式开启时进行编辑。',
+    'AIRA 可以读取工作区中的文件，并在自动接受编辑模式开启时进行编辑。',
   'Qwen Code will be able to read files in this directory and make edits when auto-accept edits is on.':
-    'Qwen Code 将能够读取此目录中的文件，并在自动接受编辑模式开启时进行编辑。',
+    'AIRA 将能够读取此目录中的文件，并在自动接受编辑模式开启时进行编辑。',
   'Enter the path to the directory:': '输入目录路径：',
   'Enter directory path…': '输入目录路径…',
   'Tab to complete · Enter to add · Esc to cancel':
@@ -1462,8 +1462,8 @@ export default {
   'Use /bug to submit issues to the maintainers when something goes off.':
     '遇到问题时，用 /bug 将问题提交给维护者。',
   'Switch auth type quickly with /auth.': '用 /auth 快速切换认证方式。',
-  'You can run any shell commands from Qwen Code using ! (e.g. !ls).':
-    '在 Qwen Code 中使用 ! 可运行任意 shell 命令（例如 !ls）。',
+  'You can run any shell commands from AIRA using ! (e.g. !ls).':
+    '在 AIRA 中使用 ! 可运行任意 shell 命令（例如 !ls）。',
   'Type / to open the command popup; Tab autocompletes slash commands and saved prompts.':
     '输入 / 打开命令弹窗；按 Tab 自动补全斜杠命令和保存的提示词。',
   'You can resume a previous conversation by running qwen --continue or qwen --resume.':
@@ -1474,8 +1474,8 @@ export default {
     '按 Tab 或输入 /approval-mode 可快速切换权限模式。',
   'Try /insight to generate personalized insights from your chat history.':
     '试试 /insight，从聊天记录中生成个性化洞察。',
-  'Add a QWEN.md file to give Qwen Code persistent project context.':
-    '添加 QWEN.md 文件，为 Qwen Code 提供持久的项目上下文。',
+  'Add an AIRA.md file to give AIRA persistent project context.':
+    '添加 AIRA.md 文件，为 AIRA 提供持久的项目上下文。',
   'Use /btw to ask a quick side question without disrupting the conversation.':
     '用 /btw 快速问一个小问题，不会打断当前对话。',
   'Context is almost full! Run /compress now or start /new to continue.':
@@ -1488,7 +1488,7 @@ export default {
   // ============================================================================
   // Exit Screen / Stats
   // ============================================================================
-  'Agent powering down. Goodbye!': 'Qwen Code 正在关闭，再见！',
+  'Agent powering down. Goodbye!': 'AIRA 正在关闭，再见！',
   'To continue this session, run': '要继续此会话，请运行',
   'Interaction Summary': '交互摘要',
   'Session ID:': '会话 ID：',
@@ -1846,7 +1846,7 @@ export default {
   'Not in plan mode. Use "/plan" to enter plan mode first.':
     '未处于计划模式。请先使用 "/plan" 进入计划模式。',
 
-  "Set up Qwen Code's status line UI": '配置 Qwen Code 的状态栏',
+  "Set up AIRA's status line UI": '配置 AIRA 的状态栏',
 
   // ============================================================================
   // AIRA init / setup commands
@@ -1899,4 +1899,22 @@ export default {
   "Failed to switch model to '{{model}}'.": "切换模型到 '{{model}}' 失败。",
   'Please configure models in settings.modelProviders or use environment variables.':
     '请在 settings.modelProviders 中配置模型或使用环境变量。',
+
+  // Context usage display
+  '% used': '% 已用',
+  '% context used': '% 上下文已用',
+
+  // IDE integration nudge
+  'Do you want to connect {{ideName}} to AIRA?':
+    '要将 {{ideName}} 连接到 AIRA 吗？',
+  'editor': '编辑器',
+  'your editor': '你的编辑器',
+  "Note: In sandbox environments, IDE integration requires manual setup on the host system. If you select Yes, you'll receive instructions on how to set this up.":
+    '注意：在沙箱环境中，IDE 集成需要在主机系统上手动设置。如果选择“是”，你将收到如何设置的说明。',
+  'If you select Yes, the CLI will connect to your {{ideName}} and have access to your open files and display diffs directly.':
+    '如果选择“是”，CLI 将连接到你的 {{ideName}}，并可以访问打开的文件以及直接显示差异。',
+  'If you select Yes, we\'ll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.':
+    '如果选择“是”，我们将安装一个扩展，允许 CLI 访问你的打开的文件并直接在 {{ideName}} 中显示差异。',
+  'Yes': '是',
+  "No, don't ask again": '不再询问',
 };

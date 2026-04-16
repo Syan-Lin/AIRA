@@ -10,6 +10,7 @@ import type { RadioSelectItem } from './components/shared/RadioButtonSelect.js';
 import { RadioButtonSelect } from './components/shared/RadioButtonSelect.js';
 import { useKeypress } from './hooks/useKeypress.js';
 import { theme } from './semantic-colors.js';
+import { t } from '../i18n/index.js';
 
 export type IdeIntegrationNudgeResult = {
   userSelection: 'yes' | 'no' | 'dismiss';
@@ -46,7 +47,7 @@ export function IdeIntegrationNudge({
 
   const OPTIONS: Array<RadioSelectItem<IdeIntegrationNudgeResult>> = [
     {
-      label: 'Yes',
+      label: t('Yes'),
       value: {
         userSelection: 'yes',
         isExtensionPreInstalled,
@@ -54,7 +55,7 @@ export function IdeIntegrationNudge({
       key: 'Yes',
     },
     {
-      label: 'No (esc)',
+      label: t('No (esc)'),
       value: {
         userSelection: 'no',
         isExtensionPreInstalled,
@@ -62,7 +63,7 @@ export function IdeIntegrationNudge({
       key: 'No (esc)',
     },
     {
-      label: "No, don't ask again",
+      label: t("No, don't ask again"),
       value: {
         userSelection: 'dismiss',
         isExtensionPreInstalled,
@@ -72,14 +73,18 @@ export function IdeIntegrationNudge({
   ];
 
   const installText = isInSandbox
-    ? `Note: In sandbox environments, IDE integration requires manual setup on the host system. If you select Yes, you'll receive instructions on how to set this up.`
+    ? t(
+        "Note: In sandbox environments, IDE integration requires manual setup on the host system. If you select Yes, you'll receive instructions on how to set this up.",
+      )
     : isExtensionPreInstalled
-      ? `If you select Yes, the CLI will connect to your ${
-          ideName ?? 'editor'
-        } and have access to your open files and display diffs directly.`
-      : `If you select Yes, we'll install an extension that allows the CLI to access your open files and display diffs directly in ${
-          ideName ?? 'your editor'
-        }.`;
+      ? t(
+          'If you select Yes, the CLI will connect to your {{ideName}} and have access to your open files and display diffs directly.',
+          { ideName: ideName ?? t('editor') },
+        )
+      : t(
+          'If you select Yes, we\'ll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.',
+          { ideName: ideName ?? t('your editor') },
+        );
 
   return (
     <Box
@@ -93,7 +98,9 @@ export function IdeIntegrationNudge({
       <Box marginBottom={1} flexDirection="column">
         <Text>
           <Text color={theme.status.warning}>{'> '}</Text>
-          {`Do you want to connect ${ideName ?? 'your editor'} to AIRA?`}
+          {t('Do you want to connect {{ideName}} to AIRA?', {
+            ideName: ideName ?? t('your editor'),
+          })}
         </Text>
         <Text color={theme.text.secondary}>{installText}</Text>
       </Box>
