@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+aira_ingest.egg-info/PKG-INFO
+aira_ingest.egg-info/SOURCES.txt
+aira_ingest.egg-info/dependency_links.txt
+aira_ingest.egg-info/entry_points.txt
+aira_ingest.egg-info/requires.txt
+aira_ingest.egg-info/top_level.txt
+ingest_raw/__init__.py
+ingest_raw/__main__.py
+ingest_raw/cli.py
+ingest_raw/core.py

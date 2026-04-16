@@ -40,7 +40,7 @@ export const skillsCommand: SlashCommand = {
       return;
     }
 
-    const skills = await skillManager.listSkills();
+    const skills = await skillManager.listSkills({ includeBundled: true });
     if (skills.length === 0) {
       context.ui.addItem(
         {
@@ -94,7 +94,7 @@ export const skillsCommand: SlashCommand = {
       return [];
     }
 
-    const skills = await skillManager.listSkills();
+    const skills = await skillManager.listSkills({ includeBundled: true });
     const normalizedPartial = partialArg.trim();
     const matches = await getSkillMatches(skills, normalizedPartial);
 

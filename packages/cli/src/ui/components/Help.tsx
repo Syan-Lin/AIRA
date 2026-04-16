@@ -15,6 +15,19 @@ interface Help {
   width?: number;
 }
 
+// Commands not relevant for the AIRA research-assistant context
+const AIRA_HELP_DENYLIST = new Set([
+  'arena',
+  'auth',
+  'bug',
+  'docs',
+  'setup-github',
+  'terminal-setup',
+  'insight',
+  'statusline',
+  'hooks',
+]);
+
 export const Help: React.FC<Help> = ({ commands, width }) => (
   <Box
     flexDirection="column"
@@ -62,7 +75,13 @@ export const Help: React.FC<Help> = ({ commands, width }) => (
       {t('Commands:')}
     </Text>
     {commands
-      .filter((command) => command.description && !command.hidden)
+      .filter(
+        (command) =>
+          command.description &&
+          !command.hidden &&
+          command.kind !== CommandKind.SKILL &&
+          !AIRA_HELP_DENYLIST.has(command.name),
+      )
       .map((command: SlashCommand) => (
         <Box key={command.name} flexDirection="column">
           <Text color={theme.text.primary}>

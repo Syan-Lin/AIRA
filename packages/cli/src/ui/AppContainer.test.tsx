@@ -78,6 +78,15 @@ vi.mock('./hooks/useAutoAcceptIndicator.js');
 vi.mock('./hooks/useGitBranchName.js');
 vi.mock('./contexts/VimModeContext.js');
 vi.mock('./contexts/SessionContext.js');
+vi.mock('./contexts/AiraModeContext.js', () => ({
+  useAiraMode: vi.fn(() => ({
+    airaMode: 'unselected',
+    setAiraMode: vi.fn(),
+    isAiraModeDialogOpen: false,
+    openAiraModeDialog: vi.fn(),
+    closeAiraModeDialog: vi.fn(),
+  })),
+}));
 vi.mock('./contexts/AgentViewContext.js', () => ({
   useAgentViewState: vi.fn(() => ({
     activeView: 'main',

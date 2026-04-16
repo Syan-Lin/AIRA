@@ -30,6 +30,7 @@ description: Use this skill when the user asks a research question based on the 
 
 - 标签匹配
 - 显示名/标题关键词
+- 一句话摘要内容匹配
 - type 过滤（如用户问实验相关，优先 experiment 类型）
 - confidence 权重（同等相关时，高置信度优先）
 

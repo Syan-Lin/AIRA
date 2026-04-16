@@ -36,6 +36,7 @@ import { SessionStatsProvider } from './ui/contexts/SessionContext.js';
 import { SettingsContext } from './ui/contexts/SettingsContext.js';
 import { VimModeProvider } from './ui/contexts/VimModeContext.js';
 import { AgentViewProvider } from './ui/contexts/AgentViewContext.js';
+import { AiraModeProvider } from './ui/contexts/AiraModeContext.js';
 import { useKittyKeyboardProtocol } from './ui/hooks/useKittyKeyboardProtocol.js';
 import { themeManager } from './ui/themes/theme-manager.js';
 import { detectAndEnableKittyProtocol } from './ui/utils/kittyProtocolDetector.js';
@@ -65,6 +66,7 @@ import { computeWindowTitle } from './utils/windowTitle.js';
 import { validateNonInteractiveAuth } from './validateNonInterActiveAuth.js';
 import { showResumeSessionPicker } from './ui/components/StandaloneSessionPicker.js';
 import { initializeLlmOutputLanguage } from './utils/languageUtils.js';
+import { ensureAiraVenv, getAiraInstallRoot } from './utils/airaVenv.js';
 
 const debugLogger = createDebugLogger('STARTUP');
 
@@ -168,13 +170,15 @@ export async function startInteractiveUI(
           <SessionStatsProvider sessionId={config.getSessionId()}>
             <VimModeProvider settings={settings}>
               <AgentViewProvider config={config}>
-                <AppContainer
-                  config={config}
-                  settings={settings}
-                  startupWarnings={startupWarnings}
-                  version={version}
-                  initializationResult={initializationResult}
-                />
+                <AiraModeProvider>
+                  <AppContainer
+                    config={config}
+                    settings={settings}
+                    startupWarnings={startupWarnings}
+                    version={version}
+                    initializationResult={initializationResult}
+                  />
+                </AiraModeProvider>
               </AgentViewProvider>
             </VimModeProvider>
           </SessionStatsProvider>
@@ -438,6 +442,12 @@ export async function main() {
         ...config.getWarnings(),
       ]),
     ];
+
+    // Ensure AIRA Python venv is ready (used by ingest skill)
+    const venvResult = ensureAiraVenv(getAiraInstallRoot() ?? process.cwd());
+    if (!venvResult.ok && venvResult.message) {
+      startupWarnings.push(`⚠️  ${venvResult.message}`);
+    }
 
     // Render UI, passing necessary config values. Check that there is no command line question.
     profileCheckpoint('before_render');

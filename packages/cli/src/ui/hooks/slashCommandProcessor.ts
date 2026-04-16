@@ -88,6 +88,7 @@ interface SlashCommandProcessorActions {
   openExtensionsManagerDialog: () => void;
   openMcpDialog: () => void;
   openHooksDialog: () => void;
+  openAiraModeDialog: () => void;
 }
 
 /**
@@ -537,6 +538,9 @@ export const useSlashCommandProcessor = (
                       return { type: 'handled' };
                     case 'hooks':
                       actions.openHooksDialog();
+                      return { type: 'handled' };
+                    case 'aira_mode':
+                      actions.openAiraModeDialog();
                       return { type: 'handled' };
                     case 'approval-mode':
                       actions.openApprovalModeDialog();

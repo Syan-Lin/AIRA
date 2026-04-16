@@ -89,7 +89,7 @@ export default {
   // ============================================================================
   // System Information Fields
   // ============================================================================
-  'AIRA': 'AIRA',
+  AIRA: 'AIRA',
   Runtime: '运行时',
   OS: '操作系统',
   Auth: '认证',
@@ -1907,14 +1907,13 @@ export default {
   // IDE integration nudge
   'Do you want to connect {{ideName}} to AIRA?':
     '要将 {{ideName}} 连接到 AIRA 吗？',
-  'editor': '编辑器',
+  editor: '编辑器',
   'your editor': '你的编辑器',
   "Note: In sandbox environments, IDE integration requires manual setup on the host system. If you select Yes, you'll receive instructions on how to set this up.":
     '注意：在沙箱环境中，IDE 集成需要在主机系统上手动设置。如果选择“是”，你将收到如何设置的说明。',
   'If you select Yes, the CLI will connect to your {{ideName}} and have access to your open files and display diffs directly.':
     '如果选择“是”，CLI 将连接到你的 {{ideName}}，并可以访问打开的文件以及直接显示差异。',
-  'If you select Yes, we\'ll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.':
+  "If you select Yes, we'll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.":
     '如果选择“是”，我们将安装一个扩展，允许 CLI 访问你的打开的文件并直接在 {{ideName}} 中显示差异。',
-  'Yes': '是',
   "No, don't ask again": '不再询问',
 };

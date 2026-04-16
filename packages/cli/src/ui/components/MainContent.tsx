@@ -12,6 +12,7 @@ import { OverflowProvider } from '../contexts/OverflowContext.js';
 import { useUIState } from '../contexts/UIStateContext.js';
 import { useAppContext } from '../contexts/AppContext.js';
 import { AppHeader } from './AppHeader.js';
+import { AiraModeHint } from './AiraModeHint.js';
 import { DebugModeNotification } from './DebugModeNotification.js';
 import { useCompactMode } from '../contexts/CompactModeContext.js';
 
@@ -35,6 +36,11 @@ export const MainContent = () => {
 
   return (
     <>
+      {uiState.airaMode !== 'unselected' && (
+        <Box marginX={2} marginBottom={1}>
+          <AiraModeHint mode={uiState.airaMode} />
+        </Box>
+      )}
       <Static
         key={`${uiState.historyRemountKey}-${uiState.currentModel}`}
         items={[

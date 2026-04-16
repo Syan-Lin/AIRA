@@ -61,6 +61,7 @@ describe('keyMatchers', () => {
     [Command.SHOW_MORE_LINES]: (key: Key) => key.ctrl && key.name === 's',
     [Command.RETRY_LAST]: (key: Key) => key.ctrl && key.name === 'y',
     [Command.TOGGLE_COMPACT_MODE]: (key: Key) => key.ctrl && key.name === 'o',
+    [Command.AIRA_MODE]: (key: Key) => key.ctrl && key.name === 'm',
     [Command.REVERSE_SEARCH]: (key: Key) => key.ctrl && key.name === 'r',
     [Command.SUBMIT_REVERSE_SEARCH]: (key: Key) =>
       key.name === 'return' && !key.ctrl,
@@ -263,6 +264,11 @@ describe('keyMatchers', () => {
       command: Command.TOGGLE_COMPACT_MODE,
       positive: [createKey('o', { ctrl: true })],
       negative: [createKey('o'), createKey('p', { ctrl: true })],
+    },
+    {
+      command: Command.AIRA_MODE,
+      positive: [createKey('m', { ctrl: true })],
+      negative: [createKey('m'), createKey('n', { ctrl: true })],
     },
 
     // Shell commands

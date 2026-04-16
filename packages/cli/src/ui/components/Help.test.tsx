@@ -43,6 +43,16 @@ const mockCommands: readonly SlashCommand[] = [
       },
     ],
   },
+  {
+    name: 'skill-cmd',
+    description: 'A skill command that should not appear in help',
+    kind: CommandKind.SKILL,
+  },
+  {
+    name: 'arena',
+    description: 'A command hidden for AIRA context',
+    kind: CommandKind.BUILT_IN,
+  },
 ];
 
 describe('Help Component', () => {
@@ -66,7 +76,56 @@ describe('Help Component', () => {
     expect(output).not.toContain('/hidden');
   });
 
-  it('should not render hidden subcommands', () => {
+  it('should not render skill commands', () => {
+    const { lastFrame } = render(<Help commands={mockCommands} />);
+    const output = lastFrame();
+
+    expect(output).not.toContain('skill-cmd');
+    expect(output).not.toContain(
+      'A skill command that should not appear in help',
+    );
+  });
+
+  it('should not render AIRA denylisted commands', () => {
+    const { lastFrame } = render(<Help commands={mockCommands} />);
+    const output = lastFrame();
+
+    expect(output).not.toContain('/arena');
+    expect(output).not.toContain('A command hidden for AIRA context');
+  });
+
+  it('should hide auth, bug, and docs from help', () => {
+    const extraCommands: readonly SlashCommand[] = [
+      ...mockCommands,
+      {
+        name: 'auth',
+        description: 'Configure authentication',
+        kind: CommandKind.BUILT_IN,
+        altNames: ['login'],
+      },
+      {
+        name: 'bug',
+        description: 'Submit a bug report',
+        kind: CommandKind.BUILT_IN,
+      },
+      {
+        name: 'docs',
+        description: 'Open documentation',
+        kind: CommandKind.BUILT_IN,
+      },
+    ];
+    const { lastFrame } = render(<Help commands={extraCommands} />);
+    const output = lastFrame();
+
+    expect(output).not.toContain('/auth');
+    expect(output).not.toContain('Configure authentication');
+    expect(output).not.toContain('/bug');
+    expect(output).not.toContain('Submit a bug report');
+    expect(output).not.toContain('/docs');
+    expect(output).not.toContain('Open documentation');
+  });
+
+  it('should render visible subcommands', () => {
     const { lastFrame } = render(<Help commands={mockCommands} />);
     const output = lastFrame();
 

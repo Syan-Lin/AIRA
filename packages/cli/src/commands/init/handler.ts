@@ -12,7 +12,7 @@ import { t } from '../../i18n/index.js';
 
 const DEFAULT_INDEX_MD = `# Project Index\n\nThis is the root index for the AIRA knowledge base.\n`;
 
-const DEFAULT_GITIGNORE = `.DS_Store\n*.tmp\nvault/*.tmp\n`;
+const DEFAULT_GITIGNORE = `.DS_Store\n*.tmp\nvault/**/*.tmp\nvault/raw/images/\nvault/raw/**/*.pdf\n`;
 
 export interface ProjectInitOptions {
   dir: string;
@@ -43,8 +43,8 @@ export async function runProjectInit(
       );
     }
 
-    // Create index.md
-    const indexPath = path.join(targetDir, 'index.md');
+    // Create vault/index.md
+    const indexPath = path.join(vaultDir, 'index.md');
     if (!fs.existsSync(indexPath)) {
       fs.writeFileSync(indexPath, DEFAULT_INDEX_MD, 'utf8');
       writeStdoutLine(t('Created {{file}}', { file: indexPath }));

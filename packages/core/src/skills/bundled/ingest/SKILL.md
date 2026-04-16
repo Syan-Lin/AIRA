@@ -75,7 +75,7 @@ PDF/文档转换可能产生图片等资源文件。工具会自动复制资源�
 
 如果文件没有 frontmatter，根据内容自动补充。
 
-### Step 4：生成 digest
+### Step 4：生成 digest + 一句话摘要
 
 读取 `vault/index.md` 获取已有知识库全貌，用于判断双链关联。
 
@@ -104,6 +104,13 @@ raw: '[[{raw_filename}]]'
 ...
 ```
 
+**同时生成一句话摘要：**
+
+- 15-20 字以内
+- 概括文档核心价值
+- 不使用完整句子（用短语）
+- 示例：`提出CNN模型预测钛合金疲劳寿命`、`实验验证热处理参数对强度影响`
+
 **生成规则：**
 
 - **标签**：从内容中提取领域标签，复用 index.md 中已有的标签以保持一致性
@@ -116,7 +123,7 @@ raw: '[[{raw_filename}]]'
 在 `vault/index.md` 的对应 type 分类下追加一行：
 
 ```markdown
-- [[{raw_filename}_digest|{显示名}]] `#tag1` `#tag2` c:{confidence}
+- [[{raw_filename}_digest|{显示名}]] `#tag1` `#tag2` c:{confidence} — {一句话摘要}
 ```
 
 ### Step 6：Git 提交
@@ -152,10 +159,10 @@ git commit -m "ingest: {描述}"
 
 ### 安装
 
+`aira-ingest` 由 AIRA 自动管理（位于 `~/.aira/.venv` 中的独立 uv 环境）。通常不需要手动安装。如果确实需要手动修复：
+
 ```bash
-cd skills/ingest
-source ../../.venv/bin/activate
-uv pip install -e .
+uv pip install -e packages/skills/ingest --python ~/.aira/.venv/bin/python
 ```
 
 ### 依赖要求
@@ -179,6 +186,8 @@ mineru-open-api auth
 或者建议用户运行 `aira setup` 来配置 `MINERU_API_KEY` 环境变量。
 
 ### 使用方式
+
+直接调用 `aira-ingest`（AIRA 已自动将其加入执行环境的 PATH）：
 
 ```bash
 # 录入单个文件

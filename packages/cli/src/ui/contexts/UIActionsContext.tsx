@@ -19,6 +19,7 @@ import { type CodingPlanRegion } from '../../constants/codingPlan.js';
 import { type AlibabaStandardRegion } from '../../constants/alibabaStandardApiKey.js';
 import type { AuthState } from '../types.js';
 import { type ArenaDialogType } from '../hooks/useArenaCommand.js';
+import type { AiraMode } from './AiraModeContext.js';
 // OpenAICredentials type (previously imported from OpenAIKeyPrompt)
 export interface OpenAICredentials {
   apiKey: string;
@@ -104,6 +105,10 @@ export interface UIActions {
   closeFeedbackDialog: () => void;
   temporaryCloseFeedbackDialog: () => void;
   submitFeedback: (rating: number) => void;
+  // AIRA mode
+  openAiraModeDialog: () => void;
+  closeAiraModeDialog: () => void;
+  setAiraMode: (mode: AiraMode) => void;
 }
 
 export const UIActionsContext = createContext<UIActions | null>(null);

@@ -85,7 +85,9 @@ export class SkillTool extends BaseDeclarativeTool<SkillParams, ToolResult> {
    */
   async refreshSkills(): Promise<void> {
     try {
-      this.availableSkills = await this.skillManager.listSkills();
+      this.availableSkills = await this.skillManager.listSkills({
+        includeBundled: true,
+      });
       this.updateDescriptionAndSchema();
     } catch (error) {
       debugLogger.warn('Failed to load skills for Skills tool:', error);

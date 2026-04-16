@@ -143,7 +143,9 @@ export async function collectContextData(
       : new Set();
 
   const skillManager = config.getSkillManager();
-  const skillConfigs = skillManager ? await skillManager.listSkills() : [];
+  const skillConfigs = skillManager
+    ? await skillManager.listSkills({ includeBundled: true })
+    : [];
   let loadedBodiesTokens = 0;
   const skills: ContextSkillDetail[] = skillConfigs.map((skill) => {
     const listingTokens = estimateTokens(

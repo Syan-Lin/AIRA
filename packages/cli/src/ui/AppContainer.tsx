@@ -124,6 +124,8 @@ import { useExtensionsManagerDialog } from './hooks/useExtensionsManagerDialog.j
 import { useMcpDialog } from './hooks/useMcpDialog.js';
 import { useHooksDialog } from './hooks/useHooksDialog.js';
 import { useAttentionNotifications } from './hooks/useAttentionNotifications.js';
+import { useAiraMode } from './contexts/AiraModeContext.js';
+import { getAiraVenvBinPath } from '../utils/airaVenv.js';
 import { useContextualTips } from './hooks/useContextualTips.js';
 import { getTipHistory } from '../services/tips/index.js';
 import {
@@ -167,6 +169,13 @@ const SHELL_HEIGHT_PADDING = 10;
 
 export const AppContainer = (props: AppContainerProps) => {
   const { settings, config, initializationResult } = props;
+  const {
+    airaMode,
+    setAiraMode,
+    isAiraModeDialogOpen,
+    openAiraModeDialog,
+    closeAiraModeDialog,
+  } = useAiraMode();
   const historyManager = useHistory();
   useMemoryMonitor(historyManager);
   const [debugMessage, setDebugMessage] = useState<string>('');
@@ -601,6 +610,7 @@ export const AppContainer = (props: AppContainerProps) => {
       openMcpDialog,
       openHooksDialog,
       openResumeDialog,
+      openAiraModeDialog,
     }),
     [
       openAuthDialog,
@@ -621,6 +631,7 @@ export const AppContainer = (props: AppContainerProps) => {
       openMcpDialog,
       openHooksDialog,
       openResumeDialog,
+      openAiraModeDialog,
     ],
   );
 
@@ -1080,6 +1091,7 @@ export const AppContainer = (props: AppContainerProps) => {
     ),
     pager: settings.merged.tools?.shell?.pager,
     showColor: settings.merged.tools?.shell?.showColor,
+    pathPrepend: [getAiraVenvBinPath()],
   });
 
   const isFocused = useFocus();
@@ -1524,6 +1536,8 @@ export const AppContainer = (props: AppContainerProps) => {
     isFolderTrustDialogOpen,
     showWelcomeBackDialog,
     handleWelcomeBackClose,
+    isAiraModeDialogOpen,
+    closeAiraModeDialog,
   });
 
   const handleExit = useCallback(
@@ -1741,6 +1755,10 @@ export const AppContainer = (props: AppContainerProps) => {
         } else {
           setFrozenSnapshot(null);
         }
+      } else if (keyMatchers[Command.AIRA_MODE](key)) {
+        if (!dialogsVisibleRef.current) {
+          openAiraModeDialog();
+        }
       }
     },
     [
@@ -1779,6 +1797,7 @@ export const AppContainer = (props: AppContainerProps) => {
       setFrozenSnapshot,
       pendingHistoryItems,
       refreshStatic,
+      openAiraModeDialog,
     ],
   );
 
@@ -1850,7 +1869,8 @@ export const AppContainer = (props: AppContainerProps) => {
     isHooksDialogOpen ||
     isApprovalModeDialogOpen ||
     isResumeDialogOpen ||
-    isExtensionsManagerDialogOpen;
+    isExtensionsManagerDialogOpen ||
+    isAiraModeDialogOpen;
   dialogsVisibleRef.current = dialogsVisible;
 
   const {
@@ -1970,6 +1990,9 @@ export const AppContainer = (props: AppContainerProps) => {
       isHooksDialogOpen,
       // Feedback dialog
       isFeedbackDialogOpen,
+      // AIRA mode
+      airaMode,
+      isAiraModeDialogOpen,
       // Per-task token tracking
       taskStartTokens,
       // Prompt suggestion
@@ -2077,6 +2100,9 @@ export const AppContainer = (props: AppContainerProps) => {
       isHooksDialogOpen,
       // Feedback dialog
       isFeedbackDialogOpen,
+      // AIRA mode
+      airaMode,
+      isAiraModeDialogOpen,
       // Per-task token tracking
       taskStartTokens,
       // Prompt suggestion
@@ -2145,6 +2171,13 @@ export const AppContainer = (props: AppContainerProps) => {
       closeFeedbackDialog,
       temporaryCloseFeedbackDialog,
       submitFeedback,
+      // AIRA mode
+      openAiraModeDialog,
+      closeAiraModeDialog,
+      setAiraMode: (mode) => {
+        setAiraMode(mode);
+        handleClearScreen();
+      },
     }),
     [
       openThemeDialog,
@@ -2203,6 +2236,10 @@ export const AppContainer = (props: AppContainerProps) => {
       closeFeedbackDialog,
       temporaryCloseFeedbackDialog,
       submitFeedback,
+      // AIRA mode
+      openAiraModeDialog,
+      closeAiraModeDialog,
+      setAiraMode,
     ],
   );
 

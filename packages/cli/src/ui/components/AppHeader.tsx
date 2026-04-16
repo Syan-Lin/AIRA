@@ -8,6 +8,7 @@ import { Box } from 'ink';
 import { AuthType } from '@qwen-code/qwen-code-core';
 import { Header, AuthDisplayType } from './Header.js';
 import { Tips } from './Tips.js';
+import { AiraStartupPrompt } from './AiraStartupPrompt.js';
 import { useSettings } from '../contexts/SettingsContext.js';
 import { useConfig } from '../contexts/ConfigContext.js';
 import { useUIState } from '../contexts/UIStateContext.js';
@@ -71,6 +72,7 @@ export const AppHeader = ({ version }: AppHeaderProps) => {
         />
       )}
       {showTips && <Tips />}
+      {uiState.airaMode === 'unselected' && <AiraStartupPrompt />}
     </Box>
   );
 };

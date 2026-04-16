@@ -80,7 +80,9 @@ describe('runProjectInit', () => {
     expect(dirs.has('/tmp/test-aira')).toBe(true);
     expect(dirs.has('/tmp/test-aira/vault')).toBe(true);
 
-    expect(fsStore.get('/tmp/test-aira/index.md')).toContain('# Project Index');
+    expect(fsStore.get('/tmp/test-aira/vault/index.md')).toContain(
+      '# Project Index',
+    );
     expect(fsStore.get('/tmp/test-aira/.gitignore')).toContain('.DS_Store');
 
     expect(child_process.execSync).toHaveBeenCalledWith('git init', {
@@ -104,12 +106,12 @@ describe('runProjectInit', () => {
 
   it('skips existing files without overwriting', async () => {
     dirs.add('/tmp/test-aira/vault');
-    fsStore.set('/tmp/test-aira/index.md', 'existing');
+    fsStore.set('/tmp/test-aira/vault/index.md', 'existing');
     fsStore.set('/tmp/test-aira/.gitignore', 'existing');
 
     await runProjectInit({ dir: '/tmp/test-aira' });
 
-    expect(fsStore.get('/tmp/test-aira/index.md')).toBe('existing');
+    expect(fsStore.get('/tmp/test-aira/vault/index.md')).toBe('existing');
     expect(fsStore.get('/tmp/test-aira/.gitignore')).toBe('existing');
 
     expect(stdoutLines.some((m) => m.includes('Skipped existing'))).toBe(true);

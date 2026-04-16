@@ -20,6 +20,7 @@ import { useVimMode } from '../contexts/VimModeContext.js';
 import { useCompactMode } from '../contexts/CompactModeContext.js';
 import { ApprovalMode } from '@qwen-code/qwen-code-core';
 import { t } from '../../i18n/index.js';
+import { AiraStatusLine } from './AiraStatusLine.js';
 
 export const Footer: React.FC = () => {
   const uiState = useUIState();
@@ -52,11 +53,7 @@ export const Footer: React.FC = () => {
   const contextWindowSize =
     config.getContentGeneratorConfig()?.contextWindowSize;
 
-  // Hide "? for shortcuts" when a custom status line is active (it already
-  // occupies the top row, so the hint is redundant). Matches upstream behavior.
-  const suppressHint = !!statusLineText;
-
-  // Left bottom row: high-priority messages > approval mode > hint.
+  // Left bottom row: high-priority messages > aira mode > approval mode > hint.
   const leftBottomContent = uiState.ctrlCPressedOnce ? (
     <Text color={theme.status.warning}>{t('Press Ctrl+C again to exit.')}</Text>
   ) : uiState.ctrlDPressedOnce ? (
@@ -70,8 +67,8 @@ export const Footer: React.FC = () => {
   ) : showAutoAcceptIndicator !== undefined &&
     showAutoAcceptIndicator !== ApprovalMode.DEFAULT ? (
     <AutoAcceptIndicator approvalMode={showAutoAcceptIndicator} />
-  ) : suppressHint ? null : (
-    <Text color={theme.text.secondary}>{t('? for shortcuts')}</Text>
+  ) : (
+    <AiraStatusLine mode={uiState.airaMode} />
   );
 
   const rightItems: Array<{ key: string; node: React.ReactNode }> = [];

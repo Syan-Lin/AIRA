@@ -91,7 +91,7 @@ export default {
   // ============================================================================
   // System Information Fields
   // ============================================================================
-  'AIRA': 'AIRA',
+  AIRA: 'AIRA',
   Runtime: 'Runtime',
   OS: 'OS',
   Auth: 'Auth',
@@ -233,8 +233,7 @@ export default {
   'Step {{n}}: Choose Location': 'Step {{n}}: Choose Location',
   'Step {{n}}: Choose Generation Method':
     'Step {{n}}: Choose Generation Method',
-  'Generate with Qwen Code (Recommended)':
-    'Generate with AIRA (Recommended)',
+  'Generate with Qwen Code (Recommended)': 'Generate with AIRA (Recommended)',
   'Manual Creation': 'Manual Creation',
   'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)':
     'Describe what this subagent should do and when it should be used. (Be comprehensive for best results)',
@@ -2014,14 +2013,13 @@ export default {
   // IDE integration nudge
   'Do you want to connect {{ideName}} to AIRA?':
     'Do you want to connect {{ideName}} to AIRA?',
-  'editor': 'editor',
+  editor: 'editor',
   'your editor': 'your editor',
   "Note: In sandbox environments, IDE integration requires manual setup on the host system. If you select Yes, you'll receive instructions on how to set this up.":
     "Note: In sandbox environments, IDE integration requires manual setup on the host system. If you select Yes, you'll receive instructions on how to set this up.",
   'If you select Yes, the CLI will connect to your {{ideName}} and have access to your open files and display diffs directly.':
     'If you select Yes, the CLI will connect to your {{ideName}} and have access to your open files and display diffs directly.',
-  'If you select Yes, we\'ll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.':
-    'If you select Yes, we\'ll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.',
-  'Yes': 'Yes',
+  "If you select Yes, we'll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.":
+    "If you select Yes, we'll install an extension that allows the CLI to access your open files and display diffs directly in {{ideName}}.",
   "No, don't ask again": "No, don't ask again",
 };

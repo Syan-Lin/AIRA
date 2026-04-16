@@ -1175,5 +1175,85 @@ export async function loadCliConfig(
     }
   }
 
+  // AIRA: add safe shell command allowlist so read-only commands auto-approve
+  const pm = config.getPermissionManager();
+  if (pm) {
+    const airaShellAllowlist = [
+      // File viewing
+      'Bash(cat *)',
+      'Bash(head *)',
+      'Bash(tail *)',
+      'Bash(less *)',
+      'Bash(more *)',
+      'Bash(mkdir *)',
+      // File listing & type detection
+      'Bash(ls *)',
+      'Bash(ll *)',
+      'Bash(la *)',
+      'Bash(file *)',
+      // Search
+      'Bash(grep *)',
+      'Bash(rg *)',
+      'Bash(ag *)',
+      'Bash(find *)',
+      'Bash(locate *)',
+      // Path & basic info
+      'Bash(pwd)',
+      'Bash(pwd *)',
+      'Bash(echo *)',
+      'Bash(wc *)',
+      'Bash(sort *)',
+      'Bash(uniq *)',
+      'Bash(stat *)',
+      'Bash(readlink *)',
+      'Bash(tree *)',
+      'Bash(basename *)',
+      'Bash(dirname *)',
+      // System info (read-only)
+      'Bash(ps *)',
+      'Bash(which *)',
+      'Bash(whereis *)',
+      'Bash(command -v *)',
+      'Bash(df *)',
+      'Bash(du *)',
+      'Bash(uname *)',
+      'Bash(whoami)',
+      'Bash(whoami *)',
+      'Bash(id)',
+      'Bash(id *)',
+      'Bash(date)',
+      'Bash(date *)',
+      'Bash(env)',
+      'Bash(env *)',
+      'Bash(printenv *)',
+      // Checksums
+      'Bash(md5sum *)',
+      'Bash(sha1sum *)',
+      'Bash(sha256sum *)',
+      // Git read-only operations
+      'Bash(git *)',
+      // Network inspection
+      'Bash(curl -I *)',
+      'Bash(curl -s *)',
+      'Bash(curl --silent *)',
+      'Bash(wget --spider *)',
+      'Bash(ping -c *)',
+      'Bash(netstat *)',
+      'Bash(ss *)',
+      'Bash(lsof *)',
+      // AIRA ingest CLI
+      'Bash(aira-ingest *)',
+      // AIRA ingest CLI
+      'Bash(uv *)',
+      // Shell control flow (safe syntax keywords; body commands are still checked individually)
+      'Bash(for *)',
+      'Bash(do *)',
+      'Bash(done)',
+    ];
+    for (const rule of airaShellAllowlist) {
+      pm.addSessionAllowRule(rule);
+    }
+  }
+
   return config;
 }

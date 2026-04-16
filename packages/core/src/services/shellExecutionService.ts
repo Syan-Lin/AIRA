@@ -113,6 +113,23 @@ function normalizePathEnvForWindows(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
  * UTF-8 output encoding so that CJK and other non-ASCII characters are emitted
  * as UTF-8 regardless of the system codepage.
  */
+function buildShellEnv(
+  shellExecutionConfig: ShellExecutionConfig | undefined,
+): NodeJS.ProcessEnv {
+  const baseEnv = { ...normalizePathEnvForWindows(process.env) };
+  const pathPrepend = shellExecutionConfig?.pathPrepend ?? [];
+
+  if (pathPrepend.length > 0) {
+    const delimiter = os.platform() === 'win32' ? ';' : ':';
+    const existingPath = baseEnv['PATH'] ?? '';
+    baseEnv['PATH'] = [...pathPrepend, existingPath]
+      .filter(Boolean)
+      .join(delimiter);
+  }
+
+  return baseEnv;
+}
+
 function applyPowerShellUtf8Prefix(command: string, shell: string): string {
   if (os.platform() === 'win32' && shell === 'powershell') {
     return '[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;' + command;
@@ -157,6 +174,8 @@ export interface ShellExecutionConfig {
   defaultBg?: string;
   // Used for testing
   disableDynamicLineTrimming?: boolean;
+  // Directories to prepend to PATH in shell executions
+  pathPrepend?: string[];
 }
 
 /**
@@ -364,6 +383,7 @@ export class ShellExecutionService {
       cwd,
       onOutputEvent,
       abortSignal,
+      shellExecutionConfig,
     );
   }
 
@@ -372,6 +392,7 @@ export class ShellExecutionService {
     cwd: string,
     onOutputEvent: (event: ShellOutputEvent) => void,
     abortSignal: AbortSignal,
+    shellExecutionConfig: ShellExecutionConfig,
   ): ShellExecutionHandle {
     try {
       const isWindows = os.platform() === 'win32';
@@ -393,7 +414,7 @@ export class ShellExecutionService {
         detached: !isWindows,
         windowsHide: isWindows,
         env: {
-          ...normalizePathEnvForWindows(process.env),
+          ...buildShellEnv(shellExecutionConfig),
           QWEN_CODE: '1',
           TERM: 'xterm-256color',
           PAGER: 'cat',
@@ -599,7 +620,7 @@ export class ShellExecutionService {
         cols,
         rows,
         env: {
-          ...normalizePathEnvForWindows(process.env),
+          ...buildShellEnv(shellExecutionConfig),
           QWEN_CODE: '1',
           TERM: 'xterm-256color',
           PAGER: shellExecutionConfig.pager ?? 'cat',

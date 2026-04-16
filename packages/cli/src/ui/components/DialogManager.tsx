@@ -43,6 +43,7 @@ import { ExtensionsManagerDialog } from './extensions/ExtensionsManagerDialog.js
 import { MCPManagementDialog } from './mcp/MCPManagementDialog.js';
 import { HooksManagementDialog } from './hooks/HooksManagementDialog.js';
 import { SessionPicker } from './SessionPicker.js';
+import { AiraModeDialog } from './AiraModeDialog.js';
 
 interface DialogManagerProps {
   addItem: UseHistoryManagerReturn['addItem'];
@@ -61,6 +62,19 @@ export const DialogManager = ({
   const uiActions = useUIActions();
   const { constrainHeight, terminalHeight, staticExtraHeight, mainAreaWidth } =
     uiState;
+
+  if (uiState.isAiraModeDialogOpen) {
+    return (
+      <AiraModeDialog
+        currentMode={uiState.airaMode}
+        onSelect={(mode) => {
+          uiActions.setAiraMode(mode);
+          uiActions.closeAiraModeDialog();
+        }}
+        onClose={uiActions.closeAiraModeDialog}
+      />
+    );
+  }
 
   if (uiState.showWelcomeBackDialog && uiState.welcomeBackInfo?.hasHistory) {
     return (

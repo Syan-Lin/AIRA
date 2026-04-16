@@ -60,8 +60,13 @@ description: Use this skill when checking or maintaining the AIRA knowledge base
 | 标签       | index 中的 `#tag` 与 digest frontmatter 的 `tags` 一致      |
 | confidence | index 中的 `c:N` 与 digest frontmatter 的 `confidence` 一致 |
 | 显示名     | index 中的 `[[xxx_digest                                    | 显示名]]`与 digest 的`# 标题` 一致 |
+| 一句话摘要 | index 条目末尾是否有 `— {摘要}` 短语                        |
 
-**修复**：以 digest 为准，更新 index.md 中不一致的条目。
+**修复**：
+
+- 标签、confidence、显示名不一致 → 以 digest 为准更新
+- 缺失一句话摘要 → 读取对应 digest 内容，生成 15-20 字摘要并追加到条目末尾
+- 已有条目无摘要的不强制报错，采用渐进式补全
 
 ### 4. 缺失的隐性双链
 

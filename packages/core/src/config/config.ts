@@ -2100,6 +2100,7 @@ export class Config {
         config.terminalHeight ?? this.shellExecutionConfig.terminalHeight,
       showColor: config.showColor ?? this.shellExecutionConfig.showColor,
       pager: config.pager ?? this.shellExecutionConfig.pager,
+      pathPrepend: config.pathPrepend ?? this.shellExecutionConfig.pathPrepend,
     };
   }
   getScreenReader(): boolean {

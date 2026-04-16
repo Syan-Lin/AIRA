@@ -53,6 +53,10 @@ export interface DialogCloseOptions {
   // Welcome back dialog
   showWelcomeBackDialog: boolean;
   handleWelcomeBackClose: () => void;
+
+  // AIRA mode dialog
+  isAiraModeDialogOpen: boolean;
+  closeAiraModeDialog: () => void;
 }
 
 /**
@@ -102,6 +106,11 @@ export function useDialogClose(options: DialogCloseOptions) {
     if (options.showWelcomeBackDialog) {
       // WelcomeBack has its own close handler
       options.handleWelcomeBackClose();
+      return true;
+    }
+
+    if (options.isAiraModeDialogOpen) {
+      options.closeAiraModeDialog();
       return true;
     }
 

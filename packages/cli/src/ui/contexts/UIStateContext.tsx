@@ -35,6 +35,7 @@ import { type UseHistoryManagerReturn } from '../hooks/useHistoryManager.js';
 import { type RestartReason } from '../hooks/useIdeTrustListener.js';
 import { type CodingPlanUpdateRequest } from '../hooks/useCodingPlanUpdates.js';
 import { type ArenaDialogType } from '../hooks/useArenaCommand.js';
+import type { AiraMode } from './AiraModeContext.js';
 
 export interface UIState {
   history: HistoryItem[];
@@ -141,6 +142,9 @@ export interface UIState {
   isHooksDialogOpen: boolean;
   // Feedback dialog
   isFeedbackDialogOpen: boolean;
+  // AIRA mode
+  airaMode: AiraMode;
+  isAiraModeDialogOpen: boolean;
   // Per-task token tracking
   taskStartTokens: number;
   // Prompt suggestion

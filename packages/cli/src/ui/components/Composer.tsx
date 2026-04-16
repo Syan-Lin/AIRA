@@ -108,7 +108,13 @@ export const Composer = () => {
           placeholder={
             vimEnabled
               ? '  ' + t("Press 'i' for INSERT mode and 'Esc' for NORMAL mode.")
-              : '  ' + t('Type your message or @path/to/file')
+              : uiState.airaMode === 'ingest'
+                ? '  ' + t('输入 URL、文件路径或粘贴内容（最多 5 条）...')
+                : uiState.airaMode === 'research'
+                  ? '  ' + t('输入你的问题，基于知识库回答...')
+                  : uiState.airaMode === 'health'
+                    ? '  ' + t('按 Y 开始检查，或输入特定检查项...')
+                    : '  ' + t('Type your message or @path/to/file')
           }
           promptSuggestion={uiState.promptSuggestion}
           onPromptSuggestionDismiss={uiState.dismissPromptSuggestion}
