@@ -1,3 +1,5 @@
 .DS_Store
 *.tmp
-vault/*.tmp
+vault/**/*.tmp
+vault/raw/images/
+vault/raw/**/*.pdf
