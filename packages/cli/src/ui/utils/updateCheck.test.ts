@@ -18,14 +18,20 @@ vi.mock('update-notifier', () => ({
 }));
 
 describe('checkForUpdates', () => {
+  let originalArgv1: string | undefined;
+
   beforeEach(() => {
     vi.useFakeTimers();
-    vi.resetAllMocks();
     // Clear DEV environment variable before each test
     delete process.env['DEV'];
+    // Save original argv[1] and set to a non-existent path so the git check
+    // fails (fs.realpathSync throws ENOENT) and update check proceeds
+    originalArgv1 = process.argv[1];
+    process.argv[1] = '/nonexistent/path/that/does/not/exist.js';
   });
 
   afterEach(() => {
+    process.argv[1] = originalArgv1 ?? '';
     vi.useRealTimers();
     vi.restoreAllMocks();
   });

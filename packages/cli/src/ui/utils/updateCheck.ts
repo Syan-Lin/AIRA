@@ -7,6 +7,9 @@
 import type { UpdateInfo } from 'update-notifier';
 import updateNotifier from 'update-notifier';
 import semver from 'semver';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { execSync } from 'node:child_process';
 import { getPackageJson } from '../../utils/package.js';
 import { createDebugLogger } from '@qwen-code/qwen-code-core';
 
@@ -44,9 +47,24 @@ function getBestAvailableUpdate(
 
 export async function checkForUpdates(): Promise<UpdateObject | null> {
   try {
-    // Skip update check when running from source (development mode)
+    // Skip update check when running from source (development mode or npm link)
     if (process.env['DEV'] === 'true') {
       return null;
+    }
+
+    // Skip update check when the CLI is running from a local git clone
+    // (e.g. npm link, direct node execution from repo)
+    try {
+      const cliDir = process.argv[1]
+        ? path.dirname(fs.realpathSync(process.argv[1]))
+        : process.cwd();
+      execSync('git rev-parse --is-inside-work-tree', {
+        cwd: cliDir,
+        stdio: 'ignore',
+      });
+      return null;
+    } catch {
+      // Not inside a git repo — proceed with normal update check
     }
     const packageJson = await getPackageJson();
     if (!packageJson || !packageJson.name || !packageJson.version) {

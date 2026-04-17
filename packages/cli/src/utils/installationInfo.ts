@@ -43,9 +43,10 @@ export function getInstallationInfo(
     // Normalize path separators to forward slashes for consistent matching.
     const realPath = fs.realpathSync(cliPath).replace(/\\/g, '/');
     const normalizedProjectRoot = projectRoot?.replace(/\\/g, '/');
-    const isGit = isGitRepository(process.cwd());
-
-    // Check for local git clone first
+    // Check for local git clone first (works even when running via npm link
+    // from a different directory, because we check the CLI binary's location)
+    const cliDir = path.dirname(realPath);
+    const isGit = isGitRepository(cliDir);
     if (
       isGit &&
       normalizedProjectRoot &&
@@ -54,6 +55,17 @@ export function getInstallationInfo(
     ) {
       return {
         packageManager: PackageManager.UNKNOWN, // Not managed by a package manager in this sense
+        isGlobal: false,
+        updateMessage:
+          'Running from a local git clone. Please update with "git pull".',
+      };
+    }
+
+    // Also detect npm-linked / source runs that are NOT inside the projectRoot
+    // but still inside a git repository (e.g. npm link from home directory)
+    if (isGit && !realPath.includes('/node_modules/')) {
+      return {
+        packageManager: PackageManager.UNKNOWN,
         isGlobal: false,
         updateMessage:
           'Running from a local git clone. Please update with "git pull".',
@@ -96,7 +108,7 @@ export function getInstallationInfo(
 
     // Check for pnpm
     if (realPath.includes('/.pnpm/global')) {
-      const updateCommand = 'pnpm add -g @qwen-code/qwen-code@latest';
+      const updateCommand = 'pnpm add -g @aira/aira-cli@latest';
       return {
         packageManager: PackageManager.PNPM,
         isGlobal: true,
@@ -109,7 +121,7 @@ export function getInstallationInfo(
 
     // Check for yarn
     if (realPath.includes('/.yarn/global')) {
-      const updateCommand = 'yarn global add @qwen-code/qwen-code@latest';
+      const updateCommand = 'yarn global add @aira/aira-cli@latest';
       return {
         packageManager: PackageManager.YARN,
         isGlobal: true,
@@ -129,7 +141,7 @@ export function getInstallationInfo(
       };
     }
     if (realPath.includes('/.bun/bin')) {
-      const updateCommand = 'bun add -g @qwen-code/qwen-code@latest';
+      const updateCommand = 'bun add -g @aira/aira-cli@latest';
       return {
         packageManager: PackageManager.BUN,
         isGlobal: true,
@@ -162,7 +174,7 @@ export function getInstallationInfo(
     }
 
     // Assume global npm
-    const updateCommand = 'npm install -g @qwen-code/qwen-code@latest';
+    const updateCommand = 'npm install -g @aira/aira-cli@latest';
     return {
       packageManager: PackageManager.NPM,
       isGlobal: true,
