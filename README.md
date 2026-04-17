@@ -1,275 +1,91 @@
 <div align="center">
 
-[![npm version](https://img.shields.io/npm/v/@qwen-code/qwen-code.svg)](https://www.npmjs.com/package/@qwen-code/qwen-code)
-[![License](https://img.shields.io/github/license/QwenLM/qwen-code.svg)](./LICENSE)
+[![License](https://img.shields.io/github/license/Syan-Lin/AIRA.svg)](./LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg)](https://nodejs.org/)
-[![Downloads](https://img.shields.io/npm/dm/@qwen-code/qwen-code.svg)](https://www.npmjs.com/package/@qwen-code/qwen-code)
 
-<a href="https://trendshift.io/repositories/15287" target="_blank"><img src="https://trendshift.io/api/badge/repositories/15287" alt="QwenLM%2Fqwen-code | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-
-**An open-source AI agent that lives in your terminal.**
-
-<a href="https://qwenlm.github.io/qwen-code-docs/zh/users/overview">中文</a> |
-<a href="https://qwenlm.github.io/qwen-code-docs/de/users/overview">Deutsch</a> |
-<a href="https://qwenlm.github.io/qwen-code-docs/fr/users/overview">français</a> |
-<a href="https://qwenlm.github.io/qwen-code-docs/ja/users/overview">日本語</a> |
-<a href="https://qwenlm.github.io/qwen-code-docs/ru/users/overview">Русский</a> |
-<a href="https://qwenlm.github.io/qwen-code-docs/pt-BR/users/overview">Português (Brasil)</a>
+**一个开源的终端 AI 科研助手。**
 
 </div>
 
-## 🎉 News
+## 🎉 简介
 
-- **2026-04-13**: Qwen OAuth free tier policy update: daily quota adjusted to 100 requests/day (from 1,000). The free tier will be discontinued on 2026-04-15. Consider using [OpenRouter](https://openrouter.ai), [Fireworks AI](https://app.fireworks.ai), or [Alibaba Cloud ModelStudio](https://modelstudio.console.alibabacloud.com/ap-southeast-1?tab=doc#/doc/?type=model&url=2840914_2&modelId=qwen3.6-plus) as alternatives.
+AIRA 是一个基于终端的开源 AI 智能体，由 [Qwen Code](https://github.com/QwenLM/qwen-code) 分叉而来，专为**科研 workflow** 设计和优化。它帮助你从论文、笔记和实验数据中构建和管理个人知识库，并用自然语言进行查询和分析。
 
-- **2026-04-02**: Qwen3.6-Plus is now live! Sign in via Qwen OAuth to use it directly, or get an API key from [Alibaba Cloud ModelStudio](https://modelstudio.console.alibabacloud.com/ap-southeast-1?tab=doc#/doc/?type=model&url=2840914_2&modelId=qwen3.6-plus) to access it through the OpenAI-compatible API.
+- **知识库优先**：将论文（PDF）、笔记和数据导入结构化 vault，自动生成摘要（digest）
+- **多协议、多模型**：通过 API Key 使用 OpenAI / Anthropic / Gemini / Qwen 等兼容接口
+- **科研导向的技能**：内置论文入库（`/ingest`）、知识库问答（`/research`）、健康检查（`/health`）等技能
+- **终端原生**：为习惯在命令行工作的研究者打造
 
-- **2026-02-16**: Qwen3.5-Plus is now live!
+## 安装
 
-## Why Qwen Code?
+### 环境要求
 
-Qwen Code is an open-source AI agent for the terminal, optimized for Qwen series models. It helps you understand large codebases, automate tedious work, and ship faster.
+确保已安装 **Node.js ≥ 20** 和 **uv**（Python 包管理器）。
 
-- **Multi-protocol, OAuth free tier**: use OpenAI / Anthropic / Gemini-compatible APIs, or sign in with Qwen OAuth for 100 free requests/day (free tier ending 2026-04-15). After that, switch to [OpenRouter](https://openrouter.ai), [Fireworks AI](https://app.fireworks.ai), or [Alibaba Cloud ModelStudio](https://modelstudio.console.alibabacloud.com/ap-southeast-1?tab=doc#/doc/?type=model&url=2840914_2&modelId=qwen3.6-plus).
-- **Open-source, co-evolving**: both the framework and the Qwen3-Coder model are open-source—and they ship and evolve together.
-- **Agentic workflow, feature-rich**: rich built-in tools (Skills, SubAgents) for a full agentic workflow and a Claude Code-like experience.
-- **Terminal-first, IDE-friendly**: built for developers who live in the command line, with optional integration for VS Code, Zed, and JetBrains IDEs.
+- Node.js：[nodejs.org](https://nodejs.org/en/download)
+- uv：[docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/)
 
-![](https://gw.alicdn.com/imgextra/i1/O1CN01D2DviS1wwtEtMwIzJ_!!6000000006373-2-tps-1600-900.png)
-
-## Installation
-
-### Quick Install (Recommended)
-
-#### Linux / macOS
+### 方式一：本地全局安装（推荐）
 
 ```bash
-bash -c "$(curl -fsSL https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen.sh)"
+# 克隆仓库
+git clone https://github.com/Syan-Lin/AIRA.git
+cd AIRA
+
+# 安装依赖并构建
+npm install
+npm run build
+npm run bundle
+
+# 创建全局命令链接
+cd packages/cli && npm link
+
+# 现在可以在任意目录使用 aira 命令
+aira
 ```
 
-#### Windows (Run as Administrator CMD)
-
-```cmd
-curl -fsSL -o %TEMP%\install-qwen.bat https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen.bat && %TEMP%\install-qwen.bat
-```
-
-> **Note**: It's recommended to restart your terminal after installation to ensure environment variables take effect.
-
-### Manual Installation
-
-#### Prerequisites
-
-Make sure you have Node.js 20 or later installed. Download it from [nodejs.org](https://nodejs.org/en/download).
-
-#### NPM
+### 方式二：直接运行（无需全局安装）
 
 ```bash
-npm install -g @qwen-code/qwen-code@latest
+git clone https://github.com/Syan-Lin/AIRA.git
+cd AIRA
+npm install
+npm run build
+npm run bundle
+
+# 通过绝对路径运行
+aira
 ```
 
-#### Homebrew (macOS, Linux)
+> **注意**：首次运行时，AIRA 会自动在 `~/.aira/.venv` 创建 Python 虚拟环境，并安装 `aira-ingest` 文档处理工具。
+
+## 快速开始
+
+### 1. 初始化科研项目
 
 ```bash
-brew install qwen-code
+mkdir my-research && cd my-research
+aira init
 ```
 
-## Quick Start
+这会创建如下结构：
+
+```
+my-research/
+├── vault/
+│   └── index.md          # 知识库索引
+└── .gitignore            # 忽略 vault 图片和临时文件
+```
+
+### 2. 启动 AIRA
 
 ```bash
-# Start Qwen Code (interactive)
-qwen
-
-# Then, in the session:
-/help
-/auth
+aira
 ```
 
-On first use, you'll be prompted to sign in. You can run `/auth` anytime to switch authentication methods.
+### 3. 配置 API Key
 
-Example prompts:
-
-```text
-What does this project do?
-Explain the codebase structure.
-Help me refactor this function.
-Generate unit tests for this module.
-```
-
-<details>
-<summary>Click to watch a demo video</summary>
-
-<video src="https://cloud.video.taobao.com/vod/HLfyppnCHplRV9Qhz2xSqeazHeRzYtG-EYJnHAqtzkQ.mp4" controls>
-Your browser does not support the video tag.
-</video>
-
-</details>
-
-## 🦞 Use Qwen Code for Coding Tasks in Claw
-
-Copy the prompt below and paste it into your agent:
-
-```
-Use Qwen Code as a coding agent. First, fetch and read this skill reference:
-https://raw.githubusercontent.com/QwenLM/qwen-code/refs/heads/main/.qwen/skills/qwen-code-claw/SKILL.md
-Then follow the instructions inside to install, authenticate, and use Qwen Code via acpx for all coding tasks.
-```
-
-## Authentication
-
-Qwen Code supports two authentication methods:
-
-- **Qwen OAuth (recommended & free)**: sign in with your `qwen.ai` account in a browser.
-- **API-KEY**: use an API key to connect to any supported provider (OpenAI, Anthropic, Google GenAI, Alibaba Cloud ModelStudio, and other compatible endpoints).
-
-#### Qwen OAuth (recommended)
-
-Start `qwen`, then run:
-
-```bash
-/auth
-```
-
-Choose **Qwen OAuth** and complete the browser flow. Your credentials are cached locally so you usually won't need to log in again.
-
-> **Note:** In non-interactive or headless environments (e.g., CI, SSH, containers), you typically **cannot** complete the OAuth browser login flow. In these cases, please use the API-KEY authentication method.
-
-#### API-KEY (flexible)
-
-Use this if you want more flexibility over which provider and model to use. Supports multiple protocols:
-
-- **OpenAI-compatible**: Alibaba Cloud ModelStudio, ModelScope, OpenAI, OpenRouter, and other OpenAI-compatible providers
-- **Anthropic**: Claude models
-- **Google GenAI**: Gemini models
-
-The **recommended** way to configure models and providers is by editing `~/.qwen/settings.json` (create it if it doesn't exist). This file lets you define all available models, API keys, and default settings in one place.
-
-##### Quick Setup in 3 Steps
-
-**Step 1:** Create or edit `~/.qwen/settings.json`
-
-Here is a complete example:
-
-```json
-{
-  "modelProviders": {
-    "openai": [
-      {
-        "id": "qwen3.6-plus",
-        "name": "qwen3.6-plus",
-        "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-        "description": "Qwen3-Coder via Dashscope",
-        "envKey": "DASHSCOPE_API_KEY"
-      }
-    ]
-  },
-  "env": {
-    "DASHSCOPE_API_KEY": "sk-xxxxxxxxxxxxx"
-  },
-  "security": {
-    "auth": {
-      "selectedType": "openai"
-    }
-  },
-  "model": {
-    "name": "qwen3.6-plus"
-  }
-}
-```
-
-**Step 2:** Understand each field
-
-| Field                        | What it does                                                                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `modelProviders`             | Declares which models are available and how to connect to them. Keys like `openai`, `anthropic`, `gemini` represent the API protocol. |
-| `modelProviders[].id`        | The model ID sent to the API (e.g. `qwen3.6-plus`, `gpt-4o`).                                                                         |
-| `modelProviders[].envKey`    | The name of the environment variable that holds your API key.                                                                         |
-| `modelProviders[].baseUrl`   | The API endpoint URL (required for non-default endpoints).                                                                            |
-| `env`                        | A fallback place to store API keys (lowest priority; prefer `.env` files or `export` for sensitive keys).                             |
-| `security.auth.selectedType` | The protocol to use on startup (`openai`, `anthropic`, `gemini`, `vertex-ai`).                                                        |
-| `model.name`                 | The default model to use when Qwen Code starts.                                                                                       |
-
-**Step 3:** Start Qwen Code — your configuration takes effect automatically:
-
-```bash
-qwen
-```
-
-Use the `/model` command at any time to switch between all configured models.
-
-##### More Examples
-
-<details>
-<summary>Coding Plan (Alibaba Cloud ModelStudio) — fixed monthly fee, higher quotas</summary>
-
-```json
-{
-  "modelProviders": {
-    "openai": [
-      {
-        "id": "qwen3.6-plus",
-        "name": "qwen3.6-plus (Coding Plan)",
-        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
-        "description": "qwen3.6-plus from ModelStudio Coding Plan",
-        "envKey": "BAILIAN_CODING_PLAN_API_KEY"
-      },
-      {
-        "id": "qwen3.5-plus",
-        "name": "qwen3.5-plus (Coding Plan)",
-        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
-        "description": "qwen3.5-plus with thinking enabled from ModelStudio Coding Plan",
-        "envKey": "BAILIAN_CODING_PLAN_API_KEY",
-        "generationConfig": {
-          "extra_body": {
-            "enable_thinking": true
-          }
-        }
-      },
-      {
-        "id": "glm-4.7",
-        "name": "glm-4.7 (Coding Plan)",
-        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
-        "description": "glm-4.7 with thinking enabled from ModelStudio Coding Plan",
-        "envKey": "BAILIAN_CODING_PLAN_API_KEY",
-        "generationConfig": {
-          "extra_body": {
-            "enable_thinking": true
-          }
-        }
-      },
-      {
-        "id": "kimi-k2.5",
-        "name": "kimi-k2.5 (Coding Plan)",
-        "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
-        "description": "kimi-k2.5 with thinking enabled from ModelStudio Coding Plan",
-        "envKey": "BAILIAN_CODING_PLAN_API_KEY",
-        "generationConfig": {
-          "extra_body": {
-            "enable_thinking": true
-          }
-        }
-      }
-    ]
-  },
-  "env": {
-    "BAILIAN_CODING_PLAN_API_KEY": "sk-xxxxxxxxxxxxx"
-  },
-  "security": {
-    "auth": {
-      "selectedType": "openai"
-    }
-  },
-  "model": {
-    "name": "qwen3.6-plus"
-  }
-}
-```
-
-> Subscribe to the Coding Plan and get your API key at [Alibaba Cloud ModelStudio(Beijing)](https://bailian.console.aliyun.com/cn-beijing?tab=coding-plan#/efm/coding-plan-index) or [Alibaba Cloud ModelStudio(intl)](https://modelstudio.console.alibabacloud.com/?tab=coding-plan#/efm/coding-plan-index).
-
-</details>
-
-<details>
-<summary>Multiple providers (OpenAI + Anthropic + Gemini)</summary>
+使用 `/auth` 命令，或编辑 `~/.aira/settings.json`：
 
 ```json
 {
@@ -278,34 +94,16 @@ Use the `/model` command at any time to switch between all configured models.
       {
         "id": "gpt-4o",
         "name": "GPT-4o",
-        "envKey": "OPENAI_API_KEY",
-        "baseUrl": "https://api.openai.com/v1"
-      }
-    ],
-    "anthropic": [
-      {
-        "id": "claude-sonnet-4-20250514",
-        "name": "Claude Sonnet 4",
-        "envKey": "ANTHROPIC_API_KEY"
-      }
-    ],
-    "gemini": [
-      {
-        "id": "gemini-2.5-pro",
-        "name": "Gemini 2.5 Pro",
-        "envKey": "GEMINI_API_KEY"
+        "baseUrl": "https://api.openai.com/v1",
+        "envKey": "OPENAI_API_KEY"
       }
     ]
   },
   "env": {
-    "OPENAI_API_KEY": "sk-xxxxxxxxxxxxx",
-    "ANTHROPIC_API_KEY": "sk-ant-xxxxxxxxxxxxx",
-    "GEMINI_API_KEY": "AIzaxxxxxxxxxxxxx"
+    "OPENAI_API_KEY": "sk-xxxxxxxxxxxxx"
   },
   "security": {
-    "auth": {
-      "selectedType": "openai"
-    }
+    "auth": { "selectedType": "openai" }
   },
   "model": {
     "name": "gpt-4o"
@@ -313,157 +111,109 @@ Use the `/model` command at any time to switch between all configured models.
 }
 ```
 
-</details>
+### 4. 导入论文
 
-<details>
-<summary>Enable thinking mode (for supported models like qwen3.5-plus)</summary>
+切换到**入库模式**（`Ctrl+M` 或 `/change`），然后输入：
 
-```json
-{
-  "modelProviders": {
-    "openai": [
-      {
-        "id": "qwen3.5-plus",
-        "name": "qwen3.5-plus (thinking)",
-        "envKey": "DASHSCOPE_API_KEY",
-        "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-        "generationConfig": {
-          "extra_body": {
-            "enable_thinking": true
-          }
-        }
-      }
-    ]
-  },
-  "env": {
-    "DASHSCOPE_API_KEY": "sk-xxxxxxxxxxxxx"
-  },
-  "security": {
-    "auth": {
-      "selectedType": "openai"
-    }
-  },
-  "model": {
-    "name": "qwen3.5-plus"
-  }
-}
+```text
+把这些论文加入我的知识库：~/Downloads/paper1.pdf ~/Downloads/paper2.pdf
 ```
 
-</details>
-
-> **Tip:** You can also set API keys via `export` in your shell or `.env` files, which take higher priority than `settings.json` → `env`. See the [authentication guide](https://qwenlm.github.io/qwen-code-docs/en/users/configuration/auth/) for full details.
-
-> **Security note:** Never commit API keys to version control. The `~/.qwen/settings.json` file is in your home directory and should stay private.
-
-## Usage
-
-As an open-source terminal agent, you can use Qwen Code in four primary ways:
-
-1. Interactive mode (terminal UI)
-2. Headless mode (scripts, CI)
-3. IDE integration (VS Code, Zed)
-4. TypeScript SDK
-
-#### Interactive mode
+或直接通过 shell 工具执行：
 
 ```bash
-cd your-project/
-qwen
+aira-ingest batch paper1.pdf paper2.pdf -v ./vault
 ```
 
-Run `qwen` in your project folder to launch the interactive terminal UI. Use `@` to reference local files (for example `@src/main.ts`).
+### 5. 提问分析
 
-#### Headless mode
+切换到**研究模式**（`Ctrl+M` 或 `/change`），然后输入：
 
-```bash
-cd your-project/
-qwen -p "your question"
+```text
+基于transformer的海洋-大气耦合模型有哪些关键发现？
 ```
 
-Use `-p` to run Qwen Code without the interactive UI—ideal for scripts, automation, and CI/CD. Learn more: [Headless mode](https://qwenlm.github.io/qwen-code-docs/en/users/features/headless).
+AIRA 会搜索你的知识库，并基于已导入的论文综合回答。
 
-#### IDE integration
+## 工作模式
 
-Use Qwen Code inside your editor (VS Code, Zed, and JetBrains IDEs):
+AIRA 为科研 workflow 设计了三种专用模式：
 
-- [Use in VS Code](https://qwenlm.github.io/qwen-code-docs/en/users/integration-vscode/)
-- [Use in Zed](https://qwenlm.github.io/qwen-code-docs/en/users/integration-zed/)
-- [Use in JetBrains IDEs](https://qwenlm.github.io/qwen-code-docs/en/users/integration-jetbrains/)
+| 模式     | 触发方式      | 用途                         |
+| -------- | ------------- | ---------------------------- |
+| **入库** | `/change` → 1 | 添加论文、笔记和数据到知识库 |
+| **研究** | `/change` → 2 | 基于知识库提问和分析         |
+| **健康** | `/change` → 3 | 检查断链、孤立文档和质量问题 |
 
-#### TypeScript SDK
+随时使用 `Ctrl+M` 或 `/change` 切换模式。
 
-Build on top of Qwen Code with the TypeScript SDK:
+## 命令
 
-- [Use the Qwen Code SDK](./packages/sdk-typescript/README.md)
+### 会话命令
 
-## Commands & Shortcuts
+- `/change` — 切换工作模式（入库 / 研究 / 健康）
+- `/skills` — 列出可用的科研技能
+- `/help` — 显示可用命令
+- `/clear` — 清空对话历史
+- `/model` — 切换 AI 模型
+- `/exit` 或 `/quit` — 退出 AIRA
 
-### Session Commands
+### 快捷键
 
-- `/help` - Display available commands
-- `/clear` - Clear conversation history
-- `/compress` - Compress history to save tokens
-- `/stats` - Show current session information
-- `/bug` - Submit a bug report
-- `/exit` or `/quit` - Exit Qwen Code
+- `Ctrl+M` — 切换工作模式
+- `Ctrl+C` — 取消当前操作
+- `Ctrl+J` — 输入框换行
+- `Ctrl+L` — 清屏
+- `Up/Down` — 浏览历史输入
+- `Shift+Tab` — 循环审批模式
 
-### Keyboard Shortcuts
+## 项目结构
 
-- `Ctrl+C` - Cancel current operation
-- `Ctrl+D` - Exit (on empty line)
-- `Up/Down` - Navigate command history
+```
+AIRA/
+├── dist/cli.js              # 打包后的 CLI 入口
+├── packages/
+│   ├── cli/                 # 终端界面和命令
+│   ├── core/                # 核心引擎（工具、技能、权限）
+│   └── skills/ingest/       # Python 入库 CLI（aira-ingest）
+└── docs/                    # 文档
+```
 
-> Learn more about [Commands](https://qwenlm.github.io/qwen-code-docs/en/users/features/commands/)
->
-> **Tip**: In YOLO mode (`--yolo`), vision switching happens automatically without prompts when images are detected. Learn more about [Approval Mode](https://qwenlm.github.io/qwen-code-docs/en/users/features/approval-mode/)
+## 配置
 
-## Configuration
+AIRA 的配置存储在 `~/.aira/settings.json`（全局）和 `.aira/settings.json`（项目级）。
 
-Qwen Code can be configured via `settings.json`, environment variables, and CLI flags.
+| 文件                    | 作用域       | 说明                          |
+| ----------------------- | ------------ | ----------------------------- |
+| `~/.aira/settings.json` | 用户（全局） | API Key、模型提供商、默认语言 |
+| `.aira/settings.json`   | 项目         | 项目级覆盖配置                |
 
-| File                    | Scope         | Description                                                                             |
-| ----------------------- | ------------- | --------------------------------------------------------------------------------------- |
-| `~/.qwen/settings.json` | User (global) | Applies to all your Qwen Code sessions. **Recommended for `modelProviders` and `env`.** |
-| `.qwen/settings.json`   | Project       | Applies only when running Qwen Code in this project. Overrides user settings.           |
+> **安全提示**：切勿将 API Key 提交到版本控制。`~/.aira/` 目录位于你的主目录下，保持私有。
 
-The most commonly used top-level fields in `settings.json`:
+## 文档
 
-| Field                        | Description                                                                                          |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `modelProviders`             | Define available models per protocol (`openai`, `anthropic`, `gemini`, `vertex-ai`).                 |
-| `env`                        | Fallback environment variables (e.g. API keys). Lower priority than shell `export` and `.env` files. |
-| `security.auth.selectedType` | The protocol to use on startup (e.g. `openai`).                                                      |
-| `model.name`                 | The default model to use when Qwen Code starts.                                                      |
+- [AIRA 分叉计划](./AIRA-FORK-PLAN.md) — 详细路线图和架构决策
+- [贡献指南](./CONTRIBUTING.md) — 如何为 AIRA 贡献代码
 
-> See the [Authentication](#api-key-flexible) section above for complete `settings.json` examples, and the [settings reference](https://qwenlm.github.io/qwen-code-docs/en/users/configuration/settings/) for all available options.
+## 常见问题
 
-## Benchmark Results
+**`aira-ingest: command not found`**
 
-### Terminal-Bench Performance
+AIRA 在 `~/.aira/.venv` 管理独立的 Python 虚拟环境，`aira-ingest` 安装在其中并自动注入到 shell 的 PATH。如果遇到此错误，请检查：
 
-| Agent     | Model              | Accuracy |
-| --------- | ------------------ | -------- |
-| Qwen Code | Qwen3-Coder-480A35 | 37.5%    |
-| Qwen Code | Qwen3-Coder-30BA3B | 31.3%    |
+1. `uv` 已安装且在系统 PATH 中
+2. 运行 `/init` 或重启 AIRA 以触发 venv 初始化
 
-## Ecosystem
+**模型 API 网络问题**
 
-Looking for a graphical interface?
+检查 `~/.aira/settings.json` 中的 API Key 配置，并确保 `baseUrl` 在你的网络环境下可访问。
 
-- [**AionUi**](https://github.com/iOfficeAI/AionUi) A modern GUI for command-line AI tools including Qwen Code
-- [**Gemini CLI Desktop**](https://github.com/Piebald-AI/gemini-cli-desktop) A cross-platform desktop/web/mobile UI for Qwen Code
+## 致谢
 
-## Troubleshooting
+本项目由 [Qwen Code](https://github.com/QwenLM/qwen-code) 分叉而来，而 Qwen Code 又基于 [Google Gemini CLI](https://github.com/google-gemini/gemini-cli)。感谢两个团队的出色工作。
 
-If you encounter issues, check the [troubleshooting guide](https://qwenlm.github.io/qwen-code-docs/en/users/support/troubleshooting/).
+AIRA 在原框架基础上专注于学术研究 workflow，新增了知识库入库、科研导向的技能和模式化 UI。
 
-To report a bug from within the CLI, run `/bug` and include a short title and repro steps.
+## 许可证
 
-## Connect with Us
-
-- Discord: https://discord.gg/RN7tqZCeDK
-- Dingtalk: https://qr.dingtalk.com/action/joingroup?code=v1,k1,+FX6Gf/ZDlTahTIRi8AEQhIaBlqykA0j+eBKKdhLeAE=&_dt_no_comment=1&origin=1
-
-## Acknowledgments
-
-This project is based on [Google Gemini CLI](https://github.com/google-gemini/gemini-cli). We acknowledge and appreciate the excellent work of the Gemini CLI team. Our main contribution focuses on parser-level adaptations to better support Qwen-Coder models.
+[Apache-2.0](./LICENSE)
